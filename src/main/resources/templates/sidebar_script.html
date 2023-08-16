@@ -1,0 +1,13 @@
+
+<script th:inline="javascript">
+  $(document).ready(function() {
+
+    //사이드바 위로 누르면 올라가게
+    $(document).ready(function() {
+      $("#topbtn").click(function() {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+      });
+    });
+
+  });
+</script>
