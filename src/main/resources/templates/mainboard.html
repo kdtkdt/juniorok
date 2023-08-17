@@ -6,20 +6,28 @@
     <title>Junior Ok</title>
     <script th:src="@{/js/jquery-3.7.0.min.js}"></script>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/sidebar/sidebar.css}" rel="stylesheet">
 </head>
 <body>
 <header class="card">Header</header>
 <div class="container">
     <div class="row">
-        <aside class="card col-2">left sidebar</aside>
-        <section class="card row col-8">
-            <div class="card">carousel</div>
-            <div class="card">search and sort</div>
-            <div class="card">posts list</div>
+        <div class="card">carousel</div>
+    </div>
+    <div class="row">
+        <aside class="card col-2">
+            left sidebar
+        </aside>
+        <section class="container col-8">
+            <div class="card row">search and sort</div>
+            <div class="card row">posts list</div>
         </section>
-        <aside class="card col-2">right sidebar</aside>
+        <aside class="col-2">
+            <th:block th:insert="~{sidebar :: sidebar}"></th:block>
+        </aside>
     </div>
 </div>
+<th:block th:insert="~{sidebar_script :: sidebar_script}"></th:block>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <footer class="card">footer</footer>
 </body>

@@ -1,15 +1,14 @@
 /*사이드바*/
-.sidecontainer {
-    position: fixed;
-    top: 120px;
-    right: 0;
-    width: 150px;
-    height:auto;
-    /*background-color : whitesmoke;*/
-    background-color: white;
-    overflow: hidden;
-}
-
+/*.sidecontainer {*/
+/*    position: fixed;*/
+/*    top: 120px;*/
+/*    right: 0;*/
+/*    width: 150px;*/
+/*    height:auto;*/
+/*    !*background-color : whitesmoke;*!*/
+/*    background-color: white;*/
+/*    overflow: hidden;*/
+/*}*/
 
 /*가로 1500px 아래로 내려가면 안보임*/
 @media screen and (max-width: 1500px) {
@@ -21,7 +20,7 @@
 /*사이드바 크기, 글씨체 설정*/
 .side_bar {
     padding: 20px;
-    width: 150px;
+    /*width: 150px;*/
     height: 40%;
     font-family: "Malgun Gothic",dotum,gulim,sans-serif;
     color: #373f57;
@@ -31,7 +30,7 @@
 /*사이드바 안의 p 굵게 ex.목록*/
 .side_bar p{
    /*padding-right: 20px;*/
-    width: 75%;
+   /* width: 75%;*/
     font-weight: bold;
     font-size: 0.8rem;
 }
