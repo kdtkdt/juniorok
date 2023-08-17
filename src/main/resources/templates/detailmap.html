@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org" th:lang="ko">
+<div th:fragment="detailmap" class="mapcontainer">
+    <!-- 모델에서 넘긴 장소 이름으로 검색됨. 지도 마커표시 + 누르면 카카오맵이동-->
+
+    <!-- 장소이름 가져오기-->
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var inputDataname = /*[[${inputDataname}]]*/ '';
+        /*]]>*/
+    </script>
+
+    <!--지도 불러오는 JS-->
+    <script src="/js/detailmap.js"></script>
+
+
+
+    <!--지도크기설정-->
+        <div id="map4" style="position:relative; width: 500px; height: 350px;"></div>
+        <script type="text/javascript" th:src="@{'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + __${kakaoMapAppkey}__ + '&libraries=services'}"></script>
+
+</div>
+</html>
