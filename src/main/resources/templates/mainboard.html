@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Junior Ok</title>
     <script th:src="@{/js/jquery-3.7.0.min.js}"></script>
+    <script th:src="@{/js/bootstrap_tooltip.js}"></script>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/css/sidebar/sidebar.css}" rel="stylesheet">
 </head>
 <body>
-<header class="card">Header</header>
+<th:block th:insert="~{header :: header}">Header</th:block>
 <div class="container">
     <div class="row">
         <div class="card">carousel</div>
