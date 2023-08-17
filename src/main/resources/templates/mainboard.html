@@ -12,11 +12,15 @@
 <header class="card">Header</header>
 <div class="container">
     <div class="row">
-        <aside class="card col-2">left sidebar</aside>
-        <section class="card row col-8">
-            <div class="card">carousel</div>
-            <div class="card">search and sort</div>
-            <div class="card">posts list</div>
+        <div class="card">carousel</div>
+    </div>
+    <div class="row">
+        <aside class="card col-2">
+            left sidebar
+        </aside>
+        <section class="container col-8">
+            <div class="card row">search and sort</div>
+            <div class="card row">posts list</div>
         </section>
         <aside class="col-2">
             <th:block th:insert="~{sidebar :: sidebar}"></th:block>
