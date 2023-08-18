@@ -38,6 +38,11 @@ public class SecurityConfig {
                         new AntPathRequestMatcher("/main")).permitAll();})
                 .oauth2Login(config -> {
                     config.authorizedClientService(oAuth2AuthorizedClientService);
+                    config.loginPage("/oauth2/authorization/github");
+                })
+                .logout(config -> {
+                    config.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+                    config.logoutSuccessUrl("/");
                 })
                 .rememberMe(config -> {
                     config.alwaysRemember(true);
