@@ -1,17 +1,25 @@
 package com.juniorok.juniorok.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import java.time.Duration;
+
+@RequiredArgsConstructor
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+
+    private final OAuth2AuthorizedClientService oAuth2AuthorizedClientService;
+    private final PersistentTokenRepository persistentTokenRepository;
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
@@ -25,8 +33,18 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain pageRequestFilterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests(auth -> {auth.requestMatchers(new AntPathRequestMatcher("/**")).permitAll();})
-                .oauth2Login(Customizer.withDefaults())
+        return http.authorizeHttpRequests(auth -> {auth.requestMatchers(
+                        new AntPathRequestMatcher("/"),
+                        new AntPathRequestMatcher("/main")).permitAll();})
+                .oauth2Login(config -> {
+                    config.authorizedClientService(oAuth2AuthorizedClientService);
+                })
+                .rememberMe(config -> {
+                    config.alwaysRemember(true);
+                    config.key("juniorOk");
+                    config.tokenValiditySeconds((int) Duration.ofDays(28).toSeconds());
+                    config.tokenRepository(persistentTokenRepository);
+                })
                 .build();
     }
 }
