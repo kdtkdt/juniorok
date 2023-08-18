@@ -11,6 +11,10 @@
         <result property="isWriter" column="writer" />
     </resultMap>
 
+    <select id="findByName" resultMap="userResultMap">
+        SELECT * FROM users WHERE nickname = #{nickname}
+    </select>
+
     <insert id="save" parameterType="User">
         INSERT INTO users(email, nickname) VALUES (#{email}, #{nickname})
         ON DUPLICATE KEY UPDATE email = #{email}, nickname = #{nickname}

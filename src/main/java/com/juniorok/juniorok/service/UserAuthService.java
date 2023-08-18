@@ -2,7 +2,9 @@ package com.juniorok.juniorok.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.juniorok.juniorok.domain.User;
 import com.juniorok.juniorok.dto.AuthUser;
+import com.juniorok.juniorok.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -36,7 +38,6 @@ public class UserAuthService extends DefaultOAuth2UserService implements UserDet
 
     /**
      * Remember Me 서비스 이용 시 사용자이름을 받아서 사용자 확인 후 권한이 부여된 사용자 객체를 반환합니다.
-     * TODO:사용자 확인 절차 구현이 필요합니다.
      * @param username the username identifying the user whose data is required.
      * @return 권한을 부여받은 사용자 객체를 반환합니다.
      * @throws UsernameNotFoundException
@@ -44,9 +45,24 @@ public class UserAuthService extends DefaultOAuth2UserService implements UserDet
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new AuthUser(List.of(new SimpleGrantedAuthority("ROLE_USER")),
+        User user = findUserByName(username);
+        return new AuthUser(List.of(new SimpleGrantedAuthority(getUserRole(user))),
                 Map.of("username", username),
-                "username");
+                "username", user);
+    }
+
+    private User findUserByName(String username) {
+        return userRepository.findByName(username).orElseThrow(() ->
+                new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
+    }
+
+    private String getUserRole(User user) {
+        if (user.isAdmin())
+            return "ROLE_ADMIN";
+        else if (user.isWriter())
+            return "ROLE_WRITER";
+        else
+            return "ROLE_USER";
     }
 
     @Override
