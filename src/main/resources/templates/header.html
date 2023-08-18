@@ -1,5 +1,7 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" th:lang="ko">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:lang="ko">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,7 +21,7 @@
                          alt="JuniorOk 로고"/>
                 </a>
             </div>
-            <div class="col-4 d-flex align-items-center justify-content-end">
+            <div sec:authorize="isAnonymous()" class="col-4 d-flex align-items-center justify-content-end">
                 <a th:href="@{/oauth2/authorization/github}">
                     <img class="img mx-2" style="width: 30px" th:src="@{/img/icon/github-mark.svg}"
                          alt="Github 로그인 이미지"/>
@@ -36,6 +38,18 @@
                     <img class="img mx-2" style="width: 30px" th:src="@{/img/icon/icon_naver.svg}"
                          alt="Naver 로그인 이미지"/>
                 </a>
+            </div>
+            <div sec:authorize="isAuthenticated()" class="col-4 d-flex align-items-center justify-content-end">
+                <div class="row text-end">
+                    <div>
+                        <span sec:authentication="name" class="text-decoration-underline"></span>
+                        <span>님 환영합니다.</span>
+                    </div>
+                    <div>
+                        <a class="text-dark">마이페이지</a>
+                        <a class="text-dark">로그아웃</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
