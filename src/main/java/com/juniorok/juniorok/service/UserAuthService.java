@@ -32,6 +32,8 @@ public class UserAuthService extends DefaultOAuth2UserService implements UserDet
 
     private final RestTemplate restTemplate;
 
+    private final UserRepository userRepository;
+
     /**
      * Remember Me 서비스 이용 시 사용자이름을 받아서 사용자 확인 후 권한이 부여된 사용자 객체를 반환합니다.
      * TODO:사용자 확인 절차 구현이 필요합니다.
@@ -55,6 +57,7 @@ public class UserAuthService extends DefaultOAuth2UserService implements UserDet
             email = Optional.of(getUserEmail(userRequest));
         Map<String, Object> attributes = new LinkedHashMap<>(oAuth2User.getAttributes());
         attributes.put("email", email.get());
+        saveUser(attributes);
         return new DefaultOAuth2User(oAuth2User.getAuthorities(), attributes, GITHUB_NAME_ATTRIBUTE_KEY);
     }
 
@@ -96,5 +99,12 @@ public class UserAuthService extends DefaultOAuth2UserService implements UserDet
             }
         });
         return email.get().orElse("");
+    }
+
+    private void saveUser(Map<String, Object> attributes) {
+        userRepository.save(User.builder()
+                .email(attributes.get("email").toString())
+                .nickname(attributes.get(GITHUB_NAME_ATTRIBUTE_KEY).toString())
+                .build());
     }
 }
