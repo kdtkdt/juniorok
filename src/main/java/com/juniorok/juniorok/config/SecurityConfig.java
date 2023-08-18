@@ -35,7 +35,10 @@ public class SecurityConfig {
     SecurityFilterChain pageRequestFilterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(auth -> {auth.requestMatchers(
                         new AntPathRequestMatcher("/"),
-                        new AntPathRequestMatcher("/main")).permitAll();})
+                        new AntPathRequestMatcher("/main"),
+                        new AntPathRequestMatcher("/modal")).permitAll();
+                        auth.requestMatchers(new AntPathRequestMatcher("/post/write")).hasAnyRole("ADMIN", "WRITER");
+        })
                 .oauth2Login(config -> {
                     config.authorizedClientService(oAuth2AuthorizedClientService);
                     config.loginPage("/oauth2/authorization/github");
