@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.juniorok.juniorok.repository.CompanyRepository">
+    <resultMap id="companyResultMap" type="com.juniorok.juniorok.domain.Company">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="ceo" column="ceo" />
+        <result property="introduction" column="introduction" />
+        <result property="homepage" column="homepage" />
+        <result property="techBlog" column="tech_blog" />
+        <result property="employees" column="employees" />
+        <result property="developers" column="developers" />
+        <result property="revenue" column="revenue" />
+        <result property="avgSalary" column="avg_salary" />
+        <collection property="addresses" ofType="com.juniorok.juniorok.dto.Address" >
+            <id property="id" column="id"/>
+            <result property="state" column="state" />
+            <result property="city" column="city" />
+            <result property="others" column="others" />
+        </collection>
+        <collection property="skills" ofType="com.juniorok.juniorok.dto.Skill">
+            <id property="id" column="id" />
+            <result property="name" column="name" />
+        </collection>
+        <collection property="benefits" ofType="com.juniorok.juniorok.dto.Benefit">
+            <id property="id" column="id" />
+            <result property="name" column="name" />
+        </collection>
+    </resultMap>
+
+    <insert id="save" parameterType="com.juniorok.juniorok.domain.Company">
+        INSERT INTO companies(
+        <if test="name != null" >name,</if>
+        <if test="ceo != null" >ceo,</if>
+        <if test="introduction != null" >introduction,</if>
+        <if test="homepage != null" >homepage,</if>
+        <if test="techBlog != null" >tech_blog,</if>
+        <if test="employees != null" >employees,</if>
+        <if test="developers != null" >developers,</if>
+        <if test="revenue != null" >revenue,</if>
+        <if test="avgSalary != null" >avg_salary</if>)
+        VALUES (
+        <if test="name != null" >#{name},</if>
+        <if test="ceo != null" >#{ceo},</if>
+        <if test="introduction != null" >#{introduction},</if>
+        <if test="homepage != null" >#{homepage},</if>
+        <if test="techBlog != null" >#{techBlog},</if>
+        <if test="employees != null" >#{employees},</if>
+        <if test="developers != null" >#{developers},</if>
+        <if test="revenue != null" >#{revenue},</if>
+        <if test="avgSalary != null" >#{avgSalary}</if>)
+        ON DUPLICATE KEY UPDATE
+        <if test="ceo != null" >ceo = #{ceo},</if>
+        <if test="introduction != null" >introduction = #{introduction},</if>
+        <if test="homepage != null" >homepage = #{homepage},</if>
+        <if test="techBlog != null" >tech_blog = #{techBlog},</if>
+        <if test="employees != null" >employees = #{employees},</if>
+        <if test="developers != null" >developers = #{developers},</if>
+        <if test="revenue != null" >revenue = #{revenue},</if>
+        <if test="avgSalary != null" >avg_salary = #{avgSalary}</if>
+    </insert>
+
+    <select id="findIdByName" parameterType="String">
+        SELECT id FROM companies WHERE name = #{name}
+    </select>
+
+
+</mapper>

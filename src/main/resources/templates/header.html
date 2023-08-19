@@ -14,7 +14,13 @@
 <th:block th:fragment="header">
     <header class="container p-4">
         <div class="row">
-            <div class="col-4"></div>
+            <div class="col-4 d-flex align-items-center">
+                <th:block th:if="${#ctx.springRequestContext.requestUri} != '/post/write'">
+                    <div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_WRITER')">
+                        <a class="btn btn-primary" th:href="@{/post/write}">공고 작성</a>
+                    </div>
+                </th:block>
+            </div>
             <div class="col-4">
                 <a th:href="@{/}">
                     <img class="img d-block mx-auto" style="width: 150px" th:src="@{/img/logo/junior-ok-logo-color-transparent-background.png}"
