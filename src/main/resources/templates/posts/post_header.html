@@ -1,0 +1,30 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Junior Ok</title>
+    <script th:src="@{/js/jquery-3.7.0.min.js}"></script>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <th:block th:fragment="post_header">
+            <div class="col-4 d-flex align-items-center">
+                <img th:src="@{/img/logo/junior-ok-logo-color-transparent-background.png}" width="120px" alt="회사 로고"/>
+                <span th:text="${postForm.companyName}" class="h3 mx-2">회사 이름</span>
+            </div>
+            <div class="col-4">
+
+            </div>
+            <div class="col-4 d-flex align-items-center justify-content-end">
+                <a type="button" class="btn btn-primary" th:href="${__postForm.postUrl__}">
+                    지원공고 보러가기
+                </a>
+            </div>
+        </th:block>
+    </div>
+</div>
+</body>
+</html>
