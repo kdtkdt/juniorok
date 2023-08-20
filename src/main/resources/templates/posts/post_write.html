@@ -56,10 +56,6 @@
             <label for="skills">기술</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="search" class="form-control" id="benefits" placeholder="복지항목" name="benefits">
-            <label for="benefits">복지항목</label>
-        </div>
-        <div class="form-floating mb-3">
             <input type="number" class="form-control" id="employees" placeholder="사원수" name="employees">
             <label for="employees">사원수</label>
         </div>
@@ -80,7 +76,7 @@
             <label for="preferredRequirements">우대요건</label>
         </div>
         <div class="mb-3">
-            <th:block th:each="benefit, s : ${benefits}" th:object="${postForm}">
+            <th:block th:each="benefit : ${benefits}" th:object="${postForm}">
                 <input th:type="checkbox" class="btn-check" th:id="|benefit${benefit.id()}|" autocomplete="off" th:field="*{benefits}" th:value="${benefit.id()}">
                 <label class="btn btn-outline-secondary" th:for="|benefit${benefit.id()}|" th:text="${benefit.name()}"></label>
             </th:block>
