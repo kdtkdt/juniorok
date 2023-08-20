@@ -2,6 +2,7 @@ package com.juniorok.juniorok.service;
 
 import com.juniorok.juniorok.domain.Company;
 import com.juniorok.juniorok.domain.Post;
+import com.juniorok.juniorok.dto.Benefit;
 import com.juniorok.juniorok.dto.JobType;
 import com.juniorok.juniorok.form.PostForm;
 import com.juniorok.juniorok.repository.PostRepository;
@@ -9,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -36,6 +37,11 @@ public class PostService {
                 .requirements(postForm.requirements())
                 .preferredRequirements(postForm.preferredRequirements())
                 .build();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Benefit> getAllBenefitTags() {
+        return postRepository.findAllBenefitTags();
     }
 
 }

@@ -1,7 +1,8 @@
 package com.juniorok.juniorok.form;
 
 import java.net.URI;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 public record PostForm (
@@ -11,8 +12,8 @@ public record PostForm (
         String location,
         long minSalary,
         long maxSalary,
-        LocalDateTime startedAt,
-        LocalDateTime deadline,
+        LocalDate startedAt,
+        LocalDate deadline,
         List<String> skills,
         List<String> benefits,
         int employees,
@@ -21,4 +22,24 @@ public record PostForm (
         URI techBlogUrl,
         String requirements,
         String preferredRequirements
-) { }
+) {
+    public static PostForm newInstance() {
+        return new PostForm(
+                "",
+                "",
+                0,
+                "",
+                0,
+                0,
+                LocalDate.now(),
+                LocalDate.now(),
+                Collections.emptyList(),
+                Collections.emptyList(),
+                0,
+                0,
+                URI.create(""),
+                URI.create(""),
+                "",
+                "");
+    }
+}

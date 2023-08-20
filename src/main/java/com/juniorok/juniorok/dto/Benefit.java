@@ -1,4 +1,4 @@
 package com.juniorok.juniorok.dto;
 
-public record Benefit(long id, String name) {
+public record Benefit(Long id, String name) {
 }

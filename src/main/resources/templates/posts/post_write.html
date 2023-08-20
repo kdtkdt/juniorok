@@ -43,11 +43,11 @@
         </div>
         <div class="input-group mb-3">
             <div class="form-floating">
-                <input type="datetime-local" aria-label="시작일" class="form-control" id="createdAt" placeholder="시작일" name="createdAt">
-                <label for="createdAt">시작일</label>
+                <input type="date" aria-label="시작일" class="form-control" id="startedAt" placeholder="시작일" name="startedAt">
+                <label for="startedAt">시작일</label>
             </div>
             <div class="form-floating">
-                <input type="datetime-local" aria-label="마감일" class="form-control" id="deadline" placeholder="마감일" name="deadline">
+                <input type="date" aria-label="마감일" class="form-control" id="deadline" placeholder="마감일" name="deadline">
                 <label for="deadline">마감일</label>
             </div>
         </div>
@@ -79,12 +79,11 @@
             <textarea type="url" class="form-control" id="preferredRequirements" placeholder="우대요건" style="height: 100px" name="preferredRequirements"></textarea>
             <label for="preferredRequirements">우대요건</label>
         </div>
-        <!--더미 데이터, 데이터베이스에 저장된 데이터 가져와서 추가 필요-->
         <div class="mb-3">
-            <input type="checkbox" class="btn-check" checked id="night" autocomplete="off" th:value="1">
-            <label class="btn btn-outline-secondary" for="night">야근 없음</label>
-            <input type="checkbox" class="btn-check" id="lunch" autocomplete="off" th:value="2">
-            <label class="btn btn-outline-secondary" for="lunch">중식 지원</label>
+            <th:block th:each="benefit, s : ${benefits}" th:object="${postForm}">
+                <input th:type="checkbox" class="btn-check" th:id="|benefit${benefit.id()}|" autocomplete="off" th:field="*{benefits}" th:value="${benefit.id()}">
+                <label class="btn btn-outline-secondary" th:for="|benefit${benefit.id()}|" th:text="${benefit.name()}"></label>
+            </th:block>
         </div>
         <div class="col-12">
             <button type="submit" class="btn btn-primary w-100 fs-2">저장</button>
