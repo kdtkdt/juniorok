@@ -11,4 +11,9 @@ public class BoardController {
         return "mainboard";
     }
 
+    @GetMapping("/mypage")
+    public String showMyPage() {
+        return "mypage";
+    }
+
 }
