@@ -13,12 +13,11 @@
 <th:block th:fragment="post_detail">
     <h1>작성한 포스트 미리보기 화면</h1>
     <div class="container-fluid">
-        <div class="row">
+        <div class="row mb-3">
             <th:block th:insert="~{/posts/post_header::post_header}"></th:block>
         </div>
-        <div class="row card">
-            <h1>임금체불여부, 자격요건 등 요약 정보</h1>
-            <h1>기술 블로그도 그냥 여기 링크 오면 좋겠음</h1>
+        <div class="row mb-3">
+            <th:block th:insert="~{/posts/post_summary::post_summary}"></th:block>
         </div>
         <div class="row card">
             <h1>기술 태그들</h1>
