@@ -23,7 +23,7 @@
             </div>
             <div class="col-4">
                 <a th:href="@{/}">
-                    <img class="img d-block mx-auto" style="width: 150px" th:src="@{/img/logo/junior-ok-logo-color-transparent-background.png}"
+                    <img class="img d-block mx-auto" style="width: 200px" th:src="@{/img/logo/junior-ok-logo-color-transparent-background.png}"
                          alt="JuniorOk 로고"/>
                 </a>
             </div>
@@ -52,8 +52,10 @@
                         <span>님 환영합니다.</span>
                     </div>
                     <div>
-                        <a class="text-dark">마이페이지</a>
-                        <a class="text-dark" th:href="@{/logout}">로그아웃</a>
+                        <div class="btn-group" role="group" aria-label="User Menu">
+                            <a type="button" class="btn btn-outline-secondary">마이페이지</a>
+                            <a type="button" class="btn btn-outline-secondary" th:href="@{/logout}">로그아웃</a>
+                        </div>
                     </div>
                 </div>
             </div>
