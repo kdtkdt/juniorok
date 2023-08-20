@@ -24,8 +24,8 @@
                 <a class="btn btn-outline-danger">잘못된 내용 신고하기🚨</a>
             </div>
         </div>
-        <div class="row mb-3 card">
-            <h1>복지 항목</h1>
+        <div class="row mb-3">
+            <th:block th:insert="~{/posts/post_benefits::post_benefits}"/>
         </div>
         <div class="row">
             <th:block th:fragment="~{detailmap::detailmap}"></th:block>
