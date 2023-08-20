@@ -39,9 +39,4 @@ public class PostService {
                 .build();
     }
 
-    @Transactional(readOnly = true)
-    public List<Benefit> getAllBenefitTags() {
-        return postRepository.findAllBenefitTags();
-    }
-
 }

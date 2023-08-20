@@ -22,7 +22,7 @@ public class PostController {
     @GetMapping("/write")
     public String showPostWriteForm(Model model) {
         model.addAttribute("postForm", PostForm.newInstance());
-        model.addAttribute("benefits", postService.getAllBenefitTags());
+        model.addAttribute("benefits", companyService.getAllBenefitTags());
         return "posts/post_write";
     }
 

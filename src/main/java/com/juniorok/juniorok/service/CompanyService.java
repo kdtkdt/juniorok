@@ -1,11 +1,14 @@
 package com.juniorok.juniorok.service;
 
 import com.juniorok.juniorok.domain.Company;
+import com.juniorok.juniorok.dto.Benefit;
 import com.juniorok.juniorok.form.PostForm;
 import com.juniorok.juniorok.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -28,4 +31,10 @@ public class CompanyService {
                 .developers(postForm.developers())
                 .build();
     }
+
+    @Transactional(readOnly = true)
+    public List<Benefit> getAllBenefitTags() {
+        return companyRepository.findAllBenefitTags();
+    }
+
 }
