@@ -18,8 +18,11 @@
         <div class="row mb-3">
             <th:block th:insert="~{/posts/post_summary::post_summary}"></th:block>
         </div>
-        <div class="row mb-3 card">
-            <h1>신고 관련</h1>
+        <div class="row mb-3">
+            <th:block th:insert="~{/posts/post_info_etc::post_info_etc}" />
+            <div class="text-center">
+                <a class="btn btn-outline-danger">잘못된 내용 신고하기🚨</a>
+            </div>
         </div>
         <div class="row mb-3 card">
             <h1>복지 항목</h1>
