@@ -12,4 +12,11 @@ public interface PostRepository {
     void save(Post post);
 
     List<Post> findPage(int page, int size);
+
+
+    //admin-게시글전체불러옴
+    List<Post>  getAllPosts();
+    //admin-게시글삭제
+    void deletePost(long postId);
+
 }

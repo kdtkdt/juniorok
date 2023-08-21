@@ -41,4 +41,10 @@ public class PostService {
     public List<Post> getPage(int page, int size) {
         return postRepository.findPage((page - 1) * size, size);
     }
+
+    
+    //어드민 게시글 전부 불러옴.
+    public List<Post> getAllPosts() { return postRepository.getAllPosts(); }
+    //어드민 게시글 낱개삭제
+    public void deletePost(long postId){ postRepository.deletePost(postId); }
 }
