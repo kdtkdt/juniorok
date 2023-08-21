@@ -1,0 +1,65 @@
+<div th:fragment="adminposttable" id="layoutSidenav">
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Dashboard</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+
+
+                <!-- 데이터테이블-->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        DataTable Example
+                    </div>
+                    <div class="card-body">
+
+                        <table id="datatablesSimple">
+                            <thead>
+                            <tr>
+                                <th>공고번호</th>
+                                <th>회사이름</th>
+                                <th>포지션명</th>
+                                <th>지원마감일</th>
+                                <th>수 정</th>
+                                <th>삭 제</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="post : ${posts}">
+                                <td th:text="${post.id}"></td>
+                                <!--                                        <td th:text="${post.id}" th:class="${post.deleted == 'true'} ? 'deleted' : 'not-deleted'"></td>-->
+                                <td th:text="${post.company.name}"></td>
+                                <td th:text="${post.position}"></td>
+                                <td th:text="${post.deadline}"></td>
+                                <td><button class="btn btn-outline-primary" th:attr="data-post-id=${post.id}">수 정</button></td>
+                                <td><button class="btn btn-outline-secondary delete-button" th:attr="data-post-id=${post.id}">삭 제</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+        <!-- 푸터-->
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Juniorok 2023</div>
+                    <div>
+                        <a href="#">Privacy Policy</a>
+                        &middot;
+                        <a href="#">Terms &amp; Conditions</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+</div>

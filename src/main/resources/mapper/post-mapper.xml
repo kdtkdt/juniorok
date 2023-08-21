@@ -85,4 +85,25 @@
         JOIN companies AS c ON p.company_id = c.id
         LIMIT #{param1}, #{param2}
     </select>
+
+
+
+
+    <!--어드민 게시글 전부 불러옴-->
+    <select id="getAllPosts" resultMap="postResultMap">
+        SELECT p.id, p.position, p.location, p.recommended, p.deadline,
+               c.id, c.name, c.avg_salary
+        FROM posts AS p
+                 JOIN companies AS c ON p.company_id = c.id
+        where p.deleted=0
+        ORDER BY p.id DESC
+    </select>
+
+
+    <!--어드민 게시글 삭제-->
+    <update id="deletePost" parameterType="java.lang.Long">
+        UPDATE posts SET deleted = 1 WHERE id = #{postId}
+    </update>
+
+
 </mapper>

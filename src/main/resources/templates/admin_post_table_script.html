@@ -1,0 +1,33 @@
+<th:block th:fragment="admin_post_tables_script">
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            $(".delete-button").click(function() {
+                var postId = $(this).data("post-id");
+
+                var confirmDelete = confirm("Are you sure you want to delete this post?");
+                if (confirmDelete) {
+
+                    $.ajax({
+                        url: "/admin/deletePost/" + postId,
+                        type: "get",
+                        success: function() {
+                            location.reload();
+                        },
+                        error: function() {
+                            alert("An error occurred while deleting the post.");
+                        }
+                    });
+                }
+            });
+
+        });
+    </script>
+</th:block>
+
+
+
+
+
+
+
+

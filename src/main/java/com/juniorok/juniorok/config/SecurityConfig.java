@@ -42,7 +42,15 @@ public class SecurityConfig {
                             new AntPathRequestMatcher("/post/write", "GET"),
                             new AntPathRequestMatcher("/post", "POST")).hasAnyRole("ADMIN", "WRITER");
                     auth.requestMatchers(
-                            new AntPathRequestMatcher("/mypage", "GET")).authenticated();
+                                new AntPathRequestMatcher("/mypage", "GET")).authenticated();
+
+                        auth.requestMatchers(
+                                new AntPathRequestMatcher("/adminpost", "GET")).hasAnyRole("ADMIN", "WRITER");
+                        auth.requestMatchers(
+                                new AntPathRequestMatcher("/admin/deletePost/**", "GET")).hasAnyRole("ADMIN", "WRITER");
+
+
+
         })
                 .oauth2Login(config -> {
                     config.authorizedClientService(oAuth2AuthorizedClientService);
@@ -60,4 +68,6 @@ public class SecurityConfig {
                 })
                 .build();
     }
+
+
 }
