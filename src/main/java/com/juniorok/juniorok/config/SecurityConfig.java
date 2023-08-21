@@ -41,6 +41,8 @@ public class SecurityConfig {
                     auth.requestMatchers(
                             new AntPathRequestMatcher("/post/write", "GET"),
                             new AntPathRequestMatcher("/post", "POST")).hasAnyRole("ADMIN", "WRITER");
+                    auth.requestMatchers(
+                            new AntPathRequestMatcher("/mypage", "GET")).authenticated();
         })
                 .oauth2Login(config -> {
                     config.authorizedClientService(oAuth2AuthorizedClientService);

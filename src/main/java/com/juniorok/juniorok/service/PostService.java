@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -25,7 +25,7 @@ public class PostService {
     private Post extractPostInfo(PostForm postForm, long companyId) {
         return Post.builder()
                 .company(Company.builder().id(companyId).build())
-                .jobType(new JobType(postForm.jobType(), ""))
+                .jobType(JobType.builder().id(postForm.jobType()).build())
                 .postUrl(postForm.postUrl().toString())
                 .position(postForm.position())
                 .startedAt(postForm.startedAt())
@@ -38,4 +38,7 @@ public class PostService {
                 .build();
     }
 
+    public List<Post> getPage(int page, int size) {
+        return postRepository.findPage((page - 1) * size, size);
+    }
 }

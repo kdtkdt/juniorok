@@ -5,7 +5,7 @@
     <resultMap id="postResultMap" type="com.juniorok.juniorok.domain.Post">
         <id property="id" column="id" />
         <result property="position" column="position" />
-        <result property="startedAt" column="position" />
+        <result property="startedAt" column="startedAt" />
         <result property="deadline" column="deadline" />
         <result property="location" column="location" />
         <result property="minSalary" column="min_salary" />
@@ -33,6 +33,10 @@
                 <result property="others" column="others" />
             </collection>
             <collection property="skills" ofType="com.juniorok.juniorok.dto.Skill">
+                <id property="id" column="id" />
+                <result property="name" column="name" />
+            </collection>
+            <collection property="benefits" ofType="com.juniorok.juniorok.dto.Benefit">
                 <id property="id" column="id" />
                 <result property="name" column="name" />
             </collection>
@@ -73,4 +77,12 @@
         <if test="preferredRequirements != null" >#{preferredRequirements},</if>
         <if test="postUrl != null" >#{postUrl}</if>)
     </insert>
+
+    <select id="findPage" parameterType="int" resultMap="postResultMap">
+        SELECT p.id, p.position, p.location, p.recommended, p.deadline,
+               c.id, c.name, c.avg_salary
+        FROM posts AS p
+        JOIN companies AS c ON p.company_id = c.id
+        LIMIT #{param1}, #{param2}
+    </select>
 </mapper>

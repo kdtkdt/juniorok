@@ -1,0 +1,7 @@
+.pop-on-hover {
+    transition: transform 0.3s ease;  /* 0.3초 동안 효과가 일어나도록 설정 */
+}
+
+.pop-on-hover:hover {
+    transform: scale(1.015);  /* 마우스를 올렸을 때 5% 크게 표시 */
+}

@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -17,11 +17,9 @@ import java.util.List;
 public class Post {
 
     private long id;
-    private Company company;
-    private JobType jobType;
     private String position;
-    private LocalDateTime startedAt;
-    private LocalDateTime deadline;
+    private LocalDate startedAt;
+    private LocalDate deadline;
     private String location;
     private long minSalary;
     private long maxSalary;
@@ -30,6 +28,8 @@ public class Post {
     private String postUrl;
     private boolean recommended;
     private boolean deleted;
+    private Company company;
+    private JobType jobType;
     private List<Skill> positionSkills;
 
 }
