@@ -77,8 +77,8 @@
         </div>
         <div class="mb-3">
             <th:block th:each="benefit : ${benefits}" th:object="${postForm}">
-                <input th:type="checkbox" class="btn-check" th:id="|benefit${benefit.id()}|" autocomplete="off" th:field="*{benefits}" th:value="${benefit.id()}">
-                <label class="btn btn-outline-secondary" th:for="|benefit${benefit.id()}|" th:text="${benefit.name()}"></label>
+                <input th:type="checkbox" class="btn-check" th:id="|benefit${benefit.getId()}|" autocomplete="off" th:field="*{benefits}" th:value="${benefit.getId()}">
+                <label class="btn btn-outline-secondary" th:for="|benefit${benefit.getId()}|" th:text="${benefit.getName()}"></label>
             </th:block>
         </div>
         <div class="col-12">

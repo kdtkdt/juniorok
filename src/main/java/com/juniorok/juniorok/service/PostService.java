@@ -2,7 +2,6 @@ package com.juniorok.juniorok.service;
 
 import com.juniorok.juniorok.domain.Company;
 import com.juniorok.juniorok.domain.Post;
-import com.juniorok.juniorok.dto.Benefit;
 import com.juniorok.juniorok.dto.JobType;
 import com.juniorok.juniorok.form.PostForm;
 import com.juniorok.juniorok.repository.PostRepository;
@@ -26,7 +25,7 @@ public class PostService {
     private Post extractPostInfo(PostForm postForm, long companyId) {
         return Post.builder()
                 .company(Company.builder().id(companyId).build())
-                .jobType(new JobType(postForm.jobType(), ""))
+                .jobType(JobType.builder().id(postForm.jobType()).build())
                 .postUrl(postForm.postUrl().toString())
                 .position(postForm.position())
                 .startedAt(postForm.startedAt())
