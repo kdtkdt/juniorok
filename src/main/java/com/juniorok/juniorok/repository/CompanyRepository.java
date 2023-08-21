@@ -18,9 +18,5 @@ public interface CompanyRepository {
     void save(Company company);
     long findIdByName(String name);
 
-    @Results(id = "benefitResultMap")
-    @Arg(column = "id", javaType = long.class)
-    @Arg(column = "name", javaType = String.class)
-    @Select("SELECT * FROM benefits")
     List<Benefit> findAllBenefitTags();
 }

@@ -65,5 +65,13 @@
         SELECT id FROM companies WHERE name = #{name}
     </select>
 
+    <resultMap id="benefitResultMap" type="com.juniorok.juniorok.dto.Benefit">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+    </resultMap>
+
+    <select id="findAllBenefitTags" resultMap="benefitResultMap">
+        SELECT * FROM benefits;
+    </select>
 
 </mapper>

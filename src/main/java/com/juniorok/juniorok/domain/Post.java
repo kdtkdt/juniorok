@@ -17,8 +17,6 @@ import java.util.List;
 public class Post {
 
     private long id;
-    private Company company;
-    private JobType jobType;
     private String position;
     private LocalDate startedAt;
     private LocalDate deadline;
@@ -30,6 +28,8 @@ public class Post {
     private String postUrl;
     private boolean recommended;
     private boolean deleted;
+    private Company company;
+    private JobType jobType;
     private List<Skill> positionSkills;
 
 }
