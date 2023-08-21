@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<th:block th:fragment="post_list_card">
+<th:block th:fragment="post_list_card" th:each="post : ${posts}">
   <div class="row mb-3">
     <div class="col-2"></div>
     <div class="col-8 pop-on-hover" data-bs-toggle="modal" data-bs-target="#postDetailsModal">
@@ -20,8 +20,8 @@
             <img class="rounded-circle" style="width: 60px" alt="회사 로고" th:src="@{/img/company.svg}" />
           </div>
           <div class="col-8">
-            <div class="row"><h4 class="m-0 text-white fw-bold">포지션</h4></div>
-            <div class="row"><p class="m-0 text-white">회사명</p></div>
+            <div class="row"><h4 class="m-0 text-white fw-bold" th:text="${post.getPosition()}">포지션</h4></div>
+            <div class="row"><p class="m-0 text-white" th:text="${post.getCompany().getName()}">회사명</p></div>
             <div class="row">
               <div>
                 <span class="btn text-white rounded-5 py-0 disabled">경기</span>
@@ -33,7 +33,7 @@
             </div>
           </div>
           <div class="col-1 d-flex align-items-center justify-content-center text-white">
-            <h5>D-??</h5>
+            <h5 th:text="|D-${T(java.time.temporal.ChronoUnit).DAYS.between(T(java.time.LocalDate).now(), post.deadline)}|"></h5>
           </div>
           <div class="col-1 d-flex align-items-center justify-content-center">
             <button class="btn btn-close btn-close-white"></button>

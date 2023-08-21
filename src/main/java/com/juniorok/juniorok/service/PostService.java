@@ -38,4 +38,7 @@ public class PostService {
                 .build();
     }
 
+    public List<Post> getPage(int page, int size) {
+        return postRepository.findPage((page - 1) * size, size);
+    }
 }

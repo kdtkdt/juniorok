@@ -77,4 +77,12 @@
         <if test="preferredRequirements != null" >#{preferredRequirements},</if>
         <if test="postUrl != null" >#{postUrl}</if>)
     </insert>
+
+    <select id="findPage" parameterType="int" resultMap="postResultMap">
+        SELECT p.id, p.position, p.location, p.recommended, p.deadline,
+               c.id, c.name, c.avg_salary
+        FROM posts AS p
+        JOIN companies AS c ON p.company_id = c.id
+        LIMIT #{param1}, #{param2}
+    </select>
 </mapper>
