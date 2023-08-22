@@ -11,35 +11,33 @@
 <div class="container">
     <div class="row">
         <th:block th:fragment="post_header">
-            <div class="container-fluid">
+            <div class="container-fluid" th:object="${post}">
                 <div class="row mb-3">
                     <div class="col-6 d-flex align-items-center">
                         <img th:src="@{/img/logo/junior-ok-logo-color-transparent-background.png}" width="120px" alt="회사 로고"/>
-                        <span class="h3 mx-2">회사 이름</span>
-                        <!--th:text="${postForm.companyName}"-->
+                        <span class="h4 mx-2" th:text="${post.getCompany().getName()}">회사 이름</span>
                     </div>
                     <div class="col-2">
 
                     </div>
                     <div class="col-4 d-flex align-items-center justify-content-end">
-                        <a type="button" class="btn btn-primary">
-                            <!--th:href="${__postForm.postUrl__}"-->
+                        <a type="button" class="btn btn-primary" th:href="${post.getPostUrl()}" target="_blank" rel="noopener noreferrer">
                             지원공고 보러가기
                         </a>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4 d-flex align-items-center">
-                        <span class="h2 mx-2">포지션명</span>
+                    <div class="col-5 d-flex align-items-center">
+                        <span class="h3 mx-2" th:text="${post.getPosition()}">포지션명</span>
                     </div>
-                    <div class="col-2">
+                    <div class="col-1">
 
                     </div>
                     <div class="col-6">
                         <div class="row d-flex align-items-center justify-content-end">
                             <p class="text-muted text-end">※ 마감일은 기업의 사정 및 조기마감으로 변경될 수 있습니다.</p>
-                            <p class="text-end">시작일:</p>
-                            <p class="text-end">마감일:</p>
+                            <p class="text-end" th:text="|시작일: ${post.getStartedAt()}|"></p>
+                            <p class="text-end" th:text="|마감일: ${post.getDeadline()}|"></p>
                         </div>
                     </div>
                 </div>

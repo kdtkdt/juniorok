@@ -13,22 +13,29 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postDetailsModal">
     모달창 띄우기 버튼
 </button>
-
-<th:block th:fragment="post_details_modal">
+<th:block th:fragment="post_details_modal_get_request">
     <div class="modal fade" id="postDetailsModal" tabindex="-1" aria-labelledby="postDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl modal-fullscreen-sm-down">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="postDetailsModalLabel">회사명</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <th:block th:insert="~{/posts/post_detail::post_detail}"></th:block>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    <button type="button" class="btn btn-primary">지원공고 보러가기</button>
-                </div>
+                <th:block th:fragment="post_details_modal">
+                    <th:block th:if="${post != null}">
+                        <th:block th:object="${post}">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="postDetailsModalLabel" th:text="${post.getCompany().getName()}">회사명</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <th:block th:insert="~{/posts/post_detail::post_detail}"></th:block>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                <a type="button" class="btn btn-primary" th:href="${post.getPostUrl()}" target="_blank" rel="noopener noreferrer">
+                                    지원공고 보러가기
+                                </a>
+                            </div>
+                        </th:block>
+                    </th:block>
+                </th:block>
             </div>
         </div>
     </div>
