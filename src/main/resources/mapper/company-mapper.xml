@@ -13,6 +13,11 @@
         <result property="developers" column="developers" />
         <result property="revenue" column="revenue" />
         <result property="avgSalary" column="avg_salary" />
+        <association property="joinLeave">
+            <id property="id" column="join_leave_id"/>
+            <result property="join" column="join" />
+            <result property="leave" column="leave" />
+        </association>
         <collection property="addresses" ofType="com.juniorok.juniorok.dto.Address" >
             <id property="id" column="id"/>
             <result property="state" column="state" />
@@ -75,7 +80,12 @@
     <select id="findAllBenefitTags" resultMap="benefitResultMap">
         SELECT * FROM benefits;
     </select>
-    
+
+    <insert id="saveBenefits" parameterType="long">
+        INSERT INTO provided_benefits(company_id, benefit_id)
+        VALUES (#{param1}, #{param2})
+    </insert>
+
     <insert id="saveAddress" parameterType="com.juniorok.juniorok.dto.Address">
         INSERT INTO addresses (company_id, state, city, others)
         VALUES (#{company.id}, #{state}, #{city}, #{others})
