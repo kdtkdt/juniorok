@@ -17,6 +17,6 @@ public interface CompanyRepository {
     void saveAddress(Address address);
     void saveJoinLeave(JoinLeave joinLeave);
     long findIdByName(String name);
-
     List<Benefit> findAllBenefitTags();
+    void saveBenefits(long companyId, long benefitId);
 }

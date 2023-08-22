@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
 import java.time.Duration;
 
@@ -37,20 +38,15 @@ public class SecurityConfig {
                     {auth.requestMatchers(
                             new AntPathRequestMatcher("/"),
                             new AntPathRequestMatcher("/main"),
-                            new AntPathRequestMatcher("/modal")).permitAll();
+                            new RegexRequestMatcher("/post/\\d+", "GET")).permitAll();
                     auth.requestMatchers(
                             new AntPathRequestMatcher("/post/write", "GET"),
                             new AntPathRequestMatcher("/post", "POST")).hasAnyRole("ADMIN", "WRITER");
                     auth.requestMatchers(
-                                new AntPathRequestMatcher("/mypage", "GET")).authenticated();
-
-                        auth.requestMatchers(
-                                new AntPathRequestMatcher("/adminpost", "GET")).hasAnyRole("ADMIN", "WRITER");
-                        auth.requestMatchers(
-                                new AntPathRequestMatcher("/admin/deletePost/**", "GET")).hasAnyRole("ADMIN", "WRITER");
-
-
-
+                            new AntPathRequestMatcher("/mypage", "GET")).authenticated();
+                    auth.requestMatchers(
+                            new AntPathRequestMatcher("/adminpost", "GET"),
+                            new AntPathRequestMatcher("/admin/deletePost/**", "GET")).hasRole("ADMIN");
         })
                 .oauth2Login(config -> {
                     config.authorizedClientService(oAuth2AuthorizedClientService);

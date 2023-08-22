@@ -10,15 +10,12 @@
 <body>
 
 <th:block th:fragment="post_benefits">
-    <!--더미데이터이므로, 이후 데이터베이스에서 불러와서 처리 필요-->
     <div class="card text-bg-light">
-        <div class="card-header bg-transparent h5 text-muted">복지 항목</div>
+        <div class="card-header bg-transparent h5 text-muted" th:object="${post}">복지 항목</div>
         <div class="card-body">
-            <button class="btn btn-outline-primary disabled">야근 없음</button>
-            <button class="btn btn-outline-primary disabled">회식 없음</button>
-            <button class="btn btn-outline-primary disabled">중식 지원</button>
-            <button class="btn btn-outline-primary disabled">석식 지원</button>
-            <button class="btn btn-outline-primary disabled">파견 없음</button>
+            <th:block th:each="benefit : ${post.getCompany().getBenefits()}">
+                <button class="btn btn-outline-primary disabled" th:text="${benefit.getName()}"></button>
+            </th:block>
         </div>
     </div>
 </th:block>

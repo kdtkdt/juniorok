@@ -21,6 +21,7 @@ public record PostForm (
         int developers,
         URI postUrl,
         URI techBlogUrl,
+        URI homepageUrl,
         String requirements,
         String preferredRequirements
 ) {
@@ -39,6 +40,7 @@ public record PostForm (
                 Collections.emptyList(),
                 0,
                 0,
+                URI.create(""),
                 URI.create(""),
                 URI.create(""),
                 "",

@@ -12,6 +12,7 @@ public interface PostRepository {
     void save(Post post);
 
     List<Post> findPage(int page, int size);
+    Post findById(long id);
 
 
     //admin-게시글전체불러옴

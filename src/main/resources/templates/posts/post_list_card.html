@@ -16,7 +16,7 @@
     <div class="col-8 pop-on-hover" data-bs-toggle="modal" data-bs-target="#postDetailsModal">
       <div class="card rounded-5 shadow" style="background: #99b3dd; cursor: pointer;">
         <div class="row card-body">
-          <input type="hidden" th:id="|companyId${s.count}|" th:value="${post.getCompany().getId()}">
+          <input type="hidden" th:id="|postId${s.count}|" th:value="${post.getId()}">
           <div class="col-2 d-flex align-items-center justify-content-center">
             <img class="rounded-circle" style="width: 60px" alt="회사 로고" th:src="@{/img/company.svg}" />
           </div>
