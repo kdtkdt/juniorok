@@ -75,5 +75,15 @@
     <select id="findAllBenefitTags" resultMap="benefitResultMap">
         SELECT * FROM benefits;
     </select>
+    
+    <insert id="saveAddress" parameterType="com.juniorok.juniorok.dto.Address">
+        INSERT INTO addresses (company_id, state, city, others)
+        VALUES (#{company.id}, #{state}, #{city}, #{others})
+    </insert>
+
+    <insert id="saveJoinLeave" parameterType="com.juniorok.juniorok.dto.JoinLeave">
+        INSERT INTO join_leaves (company_id, year, month, `join`, `leave`)
+        VALUES (#{company.id}, #{year}, #{month}, #{join}, #{leave})
+    </insert>
 
 </mapper>
