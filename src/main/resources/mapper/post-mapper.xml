@@ -38,8 +38,8 @@
                 <result property="others" column="others" />
             </collection>
             <collection property="skills" ofType="com.juniorok.juniorok.dto.Skill">
-                <id property="id" column="skill_id" />
-                <result property="name" column="skill_name" />
+                <id property="id" column="company_skill_id" />
+                <result property="name" column="company_skill_name" />
             </collection>
             <collection property="benefits" ofType="com.juniorok.juniorok.dto.Benefit">
                 <id property="id" column="benefit_id" />
@@ -85,9 +85,12 @@
 
     <select id="findPage" parameterType="int" resultMap="postResultMap">
         SELECT p.id AS id, p.position AS position, p.location AS location, p.recommended AS recommended, p.deadline AS deadline,
-               c.id AS company_id, c.name AS company_name, c.avg_salary / 10000 AS avg_salary
+               c.id AS company_id, c.name AS company_name, c.avg_salary / 10000 AS avg_salary,
+               s.name AS position_skill_name
         FROM posts AS p
         JOIN companies AS c ON p.company_id = c.id
+        LEFT JOIN position_skills AS ps ON ps.post_id = p.id
+        LEFT JOIN skills AS s ON s.id = ps.skill_id
         LIMIT #{param1}, #{param2}
     </select>
 

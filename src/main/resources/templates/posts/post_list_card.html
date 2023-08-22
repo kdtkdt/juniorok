@@ -25,12 +25,15 @@
             <div class="row"><p class="m-0 text-white" th:text="${post.getCompany().getName()}">회사명</p></div>
             <div class="row">
               <div>
-                <span class="btn text-white rounded-5 py-0 disabled">경기</span>
+                <span class="btn text-white rounded-5 py-0 disabled"
+                      th:text="${post.getLocation().split(' ')[0].replace('특별', '').replace('시', '')}">경기</span>
                 <span th:if="${post.getCompany().getAvgSalary() != null}"
                       class="btn text-white rounded-5 py-0 disabled" th:text="|평균연봉: ${post.getCompany().getAvgSalary()}|"></span>
-                <span class="btn text-white rounded-5 py-0 disabled">Java</span>
-                <span class="btn text-white rounded-5 py-0 disabled">Spring</span>
-                <span class="btn text-white rounded-5 py-0 disabled">Docker</span>
+                <th:block th:each="positionSkill, s : ${post.getPositionSkills()}">
+                  <th:block th:if="${s.count <= 3}">
+                    <span class="btn text-white rounded-5 py-0 disabled" th:text="${positionSkill.getName()}"></span>
+                  </th:block>
+                </th:block>
               </div>
             </div>
           </div>
