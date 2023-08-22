@@ -1,0 +1,111 @@
+<th:block th:fragment="admin_users_tables_script">
+    <script th:inline="javascript">
+
+
+
+        $(document).ready(function() {
+            $(".delete-button").click(function() {
+
+                if (confirm("회원을 삭제하시겠습니까?")) {
+                    var userId = $(this).data("post-id");
+                    $.ajax({
+                        url: "/user/deleteUser/" + userId,
+                        type: "get",
+                        success: function() {
+                            location.reload();
+                        },
+                        error: function() {
+                            alert("An error occurred while deleting the post.");
+                        }
+                    });
+
+                }
+            });
+
+
+
+
+            $(".check-delete-button").click(function() {
+                var selectedIds = [];
+                $(".user-checkbox:checked").each(function() {
+                    selectedIds.push($(this).attr("id").replace("checkbox-", ""));
+                });
+
+                if (selectedIds.length > 0 && confirm("선택한 회원을 삭제하시겠습니까?")) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/user/bulkDeleteUsers",
+                        data: { "ids[]": selectedIds },
+                        success: function(response) {
+                            location.reload();
+                        },
+                        error: function(xhr, status, error) {
+
+                        }
+                    });
+                }
+
+            });
+
+
+            $(".authority-button").click(function() {
+                var selectedIds = [];
+                $(".user-checkbox:checked").each(function() {
+                    selectedIds.push($(this).attr("id").replace("checkbox-", ""));
+                });
+
+                if (selectedIds.length > 0 && confirm("선택한 회원에게 글쓰기 권한을 부여하겠습니까?")) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/user/authority",
+                        data: { "ids[]": selectedIds },
+                        success: function(response) {
+                            location.reload();
+                        },
+                        error: function(xhr, status, error) {
+
+                        }
+                    });
+                }
+            });
+
+
+            $(".authority-delete-button").click(function() {
+                var selectedIds = [];
+                $(".user-checkbox:checked").each(function() {
+                    selectedIds.push($(this).attr("id").replace("checkbox-", ""));
+                });
+
+
+                if (selectedIds.length > 0 && confirm("선택한 회원에게 글쓰기 권한을 삭제하겠습니까?")) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/user/deleteauthority",
+                        data: { "ids[]": selectedIds },
+                        success: function(response) {
+                            location.reload();
+                        },
+                        error: function(xhr, status, error) {
+
+                        }
+                    });
+                }
+            });
+
+
+
+
+
+
+
+        });
+    </script>
+</th:block>
+
+
+
+
+
+
+
+

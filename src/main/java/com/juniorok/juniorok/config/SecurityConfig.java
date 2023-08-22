@@ -37,6 +37,7 @@ public class SecurityConfig {
                     {auth.requestMatchers(
                             new AntPathRequestMatcher("/"),
                             new AntPathRequestMatcher("/main"),
+                            new AntPathRequestMatcher("/user"),
                             new AntPathRequestMatcher("/modal")).permitAll();
                     auth.requestMatchers(
                             new AntPathRequestMatcher("/post/write", "GET"),
@@ -48,7 +49,30 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/adminpost", "GET")).hasAnyRole("ADMIN", "WRITER");
                         auth.requestMatchers(
                                 new AntPathRequestMatcher("/admin/deletePost/**", "GET")).hasAnyRole("ADMIN", "WRITER");
+                        auth.requestMatchers(
+                                new AntPathRequestMatcher("/post/modify/**", "GET")).hasAnyRole("ADMIN", "WRITER");
 
+                        auth.requestMatchers(
+                                new AntPathRequestMatcher("/post/update/**", "GET")).hasAnyRole("ADMIN", "WRITER");
+                        auth.requestMatchers(
+                                new AntPathRequestMatcher("/admin/**", "GET")).hasAnyRole("ADMIN", "WRITER");
+
+                        auth.requestMatchers(
+                                new AntPathRequestMatcher("/adminusers", "GET")).hasAnyRole("ADMIN", "WRITER");
+
+                        auth.requestMatchers(
+                                new AntPathRequestMatcher("/user/**", "GET")).hasAnyRole("ADMIN", "WRITER");
+
+                        auth.requestMatchers(
+                                new AntPathRequestMatcher("/user/deleteUser/**", "GET")).hasAnyRole("ADMIN", "WRITER");
+
+                        auth.requestMatchers(
+                                new AntPathRequestMatcher("/user/bulkDeleteUsers", "GET")).hasAnyRole("ADMIN", "WRITER");
+
+                        auth.requestMatchers(
+                                new AntPathRequestMatcher("/user/authority", "GET")).hasAnyRole("ADMIN", "WRITER");
+                        auth.requestMatchers(
+                                new AntPathRequestMatcher("/user/deleteauthority", "GET")).hasAnyRole("ADMIN", "WRITER");
 
 
         })
