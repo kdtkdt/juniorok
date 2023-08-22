@@ -10,12 +10,13 @@
 </head>
 <body>
 
-<th:block th:fragment="post_list_card" th:each="post : ${posts}">
+<th:block th:fragment="post_list_card" th:each="post, s : ${posts}">
   <div class="row mb-3">
     <div class="col-2"></div>
     <div class="col-8 pop-on-hover" data-bs-toggle="modal" data-bs-target="#postDetailsModal">
       <div class="card rounded-5 shadow" style="background: #99b3dd; cursor: pointer;">
         <div class="row card-body">
+          <input type="hidden" th:id="|companyId${s.count}|" th:value="${post.getCompany().getId()}">
           <div class="col-2 d-flex align-items-center justify-content-center">
             <img class="rounded-circle" style="width: 60px" alt="회사 로고" th:src="@{/img/company.svg}" />
           </div>
@@ -25,7 +26,8 @@
             <div class="row">
               <div>
                 <span class="btn text-white rounded-5 py-0 disabled">경기</span>
-                <span class="btn text-white rounded-5 py-0 disabled">평균연봉: 4000</span>
+                <span th:if="${post.getCompany().getAvgSalary() != null}"
+                      class="btn text-white rounded-5 py-0 disabled" th:text="|평균연봉: ${post.getCompany().getAvgSalary()}|"></span>
                 <span class="btn text-white rounded-5 py-0 disabled">Java</span>
                 <span class="btn text-white rounded-5 py-0 disabled">Spring</span>
                 <span class="btn text-white rounded-5 py-0 disabled">Docker</span>
@@ -33,7 +35,12 @@
             </div>
           </div>
           <div class="col-1 d-flex align-items-center justify-content-center text-white">
-            <h5 th:text="|D-${T(java.time.temporal.ChronoUnit).DAYS.between(T(java.time.LocalDate).now(), post.deadline)}|"></h5>
+            <th:block th:if="post.deadline != null">
+              <h5 th:text="|D-${T(java.time.temporal.ChronoUnit).DAYS.between(T(java.time.LocalDate).now(), post.deadline)}|"></h5>
+            </th:block>
+            <th:block th:if="post.deadline == null">
+              <h5 th:text="상시"></h5>
+            </th:block>
           </div>
           <div class="col-1 d-flex align-items-center justify-content-center">
             <button class="btn btn-close btn-close-white"></button>
