@@ -7,6 +7,7 @@ import java.util.List;
 
 public record PostForm (
         String companyName,
+        long businessNumber,
         String position,
         int jobType,
         String location,
@@ -26,6 +27,7 @@ public record PostForm (
     public static PostForm newInstance() {
         return new PostForm(
                 "",
+                0,
                 "",
                 0,
                 "",

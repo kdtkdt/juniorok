@@ -11,4 +11,7 @@ public class ApiConfig {
     @Value("${kakao.api.map.appkey}")
     String kakaoMapAppkey;
 
+    @Value("${data.go.kr.service_key}")
+    String dataGoKrServiceKey;
+
 }

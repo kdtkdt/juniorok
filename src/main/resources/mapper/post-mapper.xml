@@ -16,8 +16,8 @@
         <result property="recommended" column="recommended" />
         <result property="deleted" column="deleted" />
         <association property="company" javaType="com.juniorok.juniorok.domain.Company" >
-            <id property="id" column="id" />
-            <result property="name" column="name" />
+            <id property="id" column="company_id" />
+            <result property="name" column="company_name" />
             <result property="ceo" column="ceo" />
             <result property="introduction" column="introduction" />
             <result property="homepage" column="homepage" />
@@ -80,7 +80,7 @@
 
     <select id="findPage" parameterType="int" resultMap="postResultMap">
         SELECT p.id, p.position, p.location, p.recommended, p.deadline,
-               c.id, c.name, c.avg_salary
+               c.id AS company_id, c.name AS company_name, c.avg_salary / 10000 AS avg_salary
         FROM posts AS p
         JOIN companies AS c ON p.company_id = c.id
         LIMIT #{param1}, #{param2}

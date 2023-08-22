@@ -26,6 +26,7 @@ public class Company {
     private int developers;
     private long revenue;
     private long avgSalary;
+    private long businessNumber;
     private List<Address> addresses;
     private List<Skill> skills;
     private List<Benefit> benefits;

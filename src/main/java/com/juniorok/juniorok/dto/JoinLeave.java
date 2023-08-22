@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Address {
-    long id;
-    Company company;
-    String state;
-    String city;
-    String others;
+public class JoinLeave {
+    private Company company;
+    private int year;
+    private int month;
+    private int join;
+    private int leave;
 }
