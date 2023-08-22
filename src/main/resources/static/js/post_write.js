@@ -9,4 +9,37 @@ $(document).ready(() => {
 
         $(this).off('submit').submit();
     });
+
+    $('#skillsInput').change(function() {
+        const selectedSkill = $(this).val();
+        const skillId = $(`option[value='${selectedSkill}']`).attr('id').replaceAll('skills', '');
+
+        const thymeleaf = $('<input>')
+            .attr('name', '_skills')
+            .attr('type', 'hidden')
+            .val('on');
+        $('#skills').append(thymeleaf);
+
+        const skillDiv = $('<input>')
+            .addClass('btn-check')
+            .attr('id', 'skill' + skillId)
+            .attr('type', '')
+            .attr('value', skillId)
+            .attr('name', 'skills')
+            .click(function() {
+                    $(this).prev().remove(); // hidden 태그 제거
+                    $(this).next().remove(); // label 태그 제거
+                    $(this).remove(); // Skill 태그 제거
+            });
+
+        $('#skills').append(skillDiv);
+
+        const label = $('<label>')
+            .addClass('btn btn-outline-primary')
+            .attr('for', `skill` + skillId)
+            .text(selectedSkill);
+        $('#skills').append(label);
+
+        $(this).val('');
+    });
 })

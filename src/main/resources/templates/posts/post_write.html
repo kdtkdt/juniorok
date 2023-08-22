@@ -61,8 +61,16 @@
             </div>
         </div>
         <div class="form-floating mb-3">
-            <input type="search" class="form-control" id="skills" placeholder="기술" name="skills">
-            <label for="skills">기술</label>
+            <input type="search" class="form-control" list="skillOptions" id="skillsInput" placeholder="기술">
+            <label for="skillsInput">기술</label>
+            <datalist id="skillOptions">
+                <th:block th:each="skill : ${skills}">
+                    <option th:value="|${skill.getName()}|" th:id="|skills${skill.getId()}|">
+                </th:block>
+            </datalist>
+        </div>
+        <div id="skills" class="mb-3">
+
         </div>
         <div class="form-floating mb-3">
             <input type="number" class="form-control" id="employees" placeholder="사원수" name="employees">

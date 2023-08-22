@@ -1,6 +1,7 @@
 package com.juniorok.juniorok.repository;
 
 import com.juniorok.juniorok.domain.Post;
+import com.juniorok.juniorok.dto.Skill;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -19,5 +20,6 @@ public interface PostRepository {
     List<Post>  getAllPosts();
     //admin-게시글삭제
     void deletePost(long postId);
+    List<Skill> findAllSkillNames();
 
 }

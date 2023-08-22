@@ -124,5 +124,14 @@
         UPDATE posts SET deleted = 1 WHERE id = #{postId}
     </update>
 
+    <resultMap id="skillResultMap" type="com.juniorok.juniorok.dto.Skill">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+    </resultMap>
+
+    <select id="findAllSkillNames" resultMap="skillResultMap">
+        SELECT * FROM skills;
+    </select>
+
 
 </mapper>

@@ -3,6 +3,7 @@ package com.juniorok.juniorok.service;
 import com.juniorok.juniorok.domain.Company;
 import com.juniorok.juniorok.domain.Post;
 import com.juniorok.juniorok.dto.JobType;
+import com.juniorok.juniorok.dto.Skill;
 import com.juniorok.juniorok.form.PostForm;
 import com.juniorok.juniorok.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -53,4 +54,9 @@ public class PostService {
     public List<Post> getAllPosts() { return postRepository.getAllPosts(); }
     //어드민 게시글 낱개삭제
     public void deletePost(long postId){ postRepository.deletePost(postId); }
+
+    @Transactional(readOnly = true)
+    public List<Skill> getAllSkillNames() {
+        return postRepository.findAllSkillNames();
+    }
 }
