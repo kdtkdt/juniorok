@@ -13,6 +13,7 @@ public interface PostRepository {
     void save(Post post);
 
     List<Post> findPage(int page, int size);
+    long findIdByPositionAndCompanyId(String position, long companyId);
     Post findById(long id);
 
 
@@ -21,5 +22,6 @@ public interface PostRepository {
     //admin-게시글삭제
     void deletePost(long postId);
     List<Skill> findAllSkillNames();
+    void savePositionSkills(long postId, long skillId);
 
 }

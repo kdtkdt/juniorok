@@ -21,6 +21,8 @@ public class PostService {
     @Transactional
     public void savePost(PostForm postForm, long companyId) {
         postRepository.save(extractPostInfo(postForm, companyId));
+        long postId = postRepository.findIdByPositionAndCompanyId(postForm.position(), companyId);
+        postForm.skills().forEach(skillId -> postRepository.savePositionSkills(postId, Long.parseLong(skillId)));
     }
 
     private Post extractPostInfo(PostForm postForm, long companyId) {

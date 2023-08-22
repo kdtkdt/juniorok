@@ -91,6 +91,12 @@
         LIMIT #{param1}, #{param2}
     </select>
 
+    <select id="findIdByPositionAndCompanyId" >
+        SELECT id
+        FROM posts
+        WHERE position=#{param1} AND company_id=#{param2}
+    </select>
+
     <select id="findById" parameterType="long" resultMap="postResultMap">
         SELECT p.id AS id, p.company_id AS company_id, p.job_type_id, p.position AS position,
                p.started_at AS started_at, p.deadline AS deadline, p.location AS location,
@@ -132,6 +138,10 @@
     <select id="findAllSkillNames" resultMap="skillResultMap">
         SELECT * FROM skills;
     </select>
+
+    <insert id="savePositionSkills" parameterType="long">
+        INSERT INTO position_skills VALUES (#{param1}, #{param2})
+    </insert>
 
 
 </mapper>
