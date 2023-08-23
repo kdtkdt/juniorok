@@ -20,6 +20,7 @@ public class PostController {
 
     private final PostService postService;
     private final CompanyService companyService;
+    private final ApiConfig apiConfig;
 
 
     @GetMapping("/write")
@@ -32,10 +33,9 @@ public class PostController {
 
     @PostMapping
     public String savePost(@ModelAttribute PostForm postForm, Model model) {
-        model.addAttribute("postForm", postForm);
         long companyId = companyService.saveCompany(postForm);
         postService.savePost(postForm, companyId);
-        return "posts/post_detail";
+        return "mainboard";
     }
 
     @GetMapping("/{id}")
@@ -43,8 +43,8 @@ public class PostController {
         Post post = postService.getPostById(id);
         model.addAttribute("post", post);
         //조회(현재는 근무지)
-        String inputDataname = post.getLocation();
-        model.addAttribute("inputDataname", inputDataname);
+        model.addAttribute("location", post.getLocation());
+        model.addAttribute("kakaoMapAppkey", apiConfig.getKakaoMapAppkey());
         return "posts/post_modal::post_details_modal";
     }
 
@@ -53,7 +53,7 @@ public class PostController {
                                         @RequestParam(name = "skills") String skills,
                                         @RequestParam(name = "keyword") String keyword,
                                         @RequestParam(name = "page", defaultValue = "1") int page) {
-        var posts = postService.getPage(page, 10, keyword,
+        var posts = postService.getPage(page, 6, keyword,
                 skills.isEmpty() ? Collections.emptyList() : List.of(skills.split(",")));
         model.addAttribute("posts", posts);
         return "posts/post_list_card::post_list_card";

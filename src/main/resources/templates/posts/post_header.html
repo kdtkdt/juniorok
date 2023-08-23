@@ -15,7 +15,7 @@
                 <div class="row mb-3">
                     <div class="col-6 d-flex align-items-center">
                         <img th:src="@{/img/logo/junior-ok-logo-color-transparent-background.png}" width="120px" alt="회사 로고"/>
-                        <span class="h4 mx-2" th:text="${post.getCompany().getName()}">회사 이름</span>
+                        <span th:id="companyName" class="h4 mx-2" th:text="${post.getCompany().getName()}">회사 이름</span>
                     </div>
                     <div class="col-2">
 

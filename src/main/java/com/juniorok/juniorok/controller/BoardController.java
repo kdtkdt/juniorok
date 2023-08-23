@@ -21,7 +21,7 @@ public class BoardController {
 
     @GetMapping("/mypage")
     public String showMyPage(Model model) {
-        model.addAttribute("posts", postService.getPage(1, 10, null, null));
+        model.addAttribute("posts", postService.getPage(1, 6, null, null));
         model.addAttribute("skills", postService.getAllSkills());
         model.addAttribute("kakaoMapAppkey", apiConfig.getKakaoMapAppkey());
         return "mypage";
