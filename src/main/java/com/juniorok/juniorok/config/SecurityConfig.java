@@ -46,6 +46,18 @@ public class SecurityConfig {
                             new AntPathRequestMatcher("/mypage", "GET")).authenticated();
                     auth.requestMatchers(
                             new AntPathRequestMatcher("/adminpost", "GET"),
+                            new AntPathRequestMatcher("/admin/deletePost/**", "GET"),
+                            new AntPathRequestMatcher("/post/modify/**", "GET"),
+                            new AntPathRequestMatcher("/post/update/**", "GET"),
+                            new AntPathRequestMatcher("/admin/**", "GET"),
+                            new AntPathRequestMatcher("/adminusers", "GET"),
+                            new AntPathRequestMatcher("/user/**", "GET"),
+                            new AntPathRequestMatcher("/user/deleteUser/**", "GET"),
+                            new AntPathRequestMatcher("/user/bulkDeleteUsers", "GET"),
+                            new AntPathRequestMatcher("/user/authority", "GET"),
+                            new AntPathRequestMatcher("/user/deleteauthority", "GET")).hasAnyRole("ADMIN", "WRITER");
+                    auth.requestMatchers(
+                            new AntPathRequestMatcher("/adminpost", "GET"),
                             new AntPathRequestMatcher("/admin/deletePost/**", "GET")).hasRole("ADMIN");
         })
                 .oauth2Login(config -> {
