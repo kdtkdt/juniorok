@@ -33,12 +33,12 @@
         </th:block>
     </div>
     <div id="postListContainer" class="container-fluid">
-        <th:block th:insert="~{/posts/post_list_card::post_list_card}" />
+        <th:block th:insert="~{posts/post_list_card::post_list_card}" />
     </div>
     <div class="modal fade" id="postDetailsModal" tabindex="-1" aria-labelledby="postDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl modal-fullscreen-sm-down">
             <div class="modal-content">
-                <th:block th:insert="~{/posts/post_modal::post_details_modal}" />
+                <th:block th:insert="~{posts/post_modal::post_details_modal}" />
             </div>
         </div>
     </div>
