@@ -33,10 +33,9 @@ public class PostController {
 
     @PostMapping
     public String savePost(@ModelAttribute PostForm postForm, Model model) {
-        model.addAttribute("postForm", postForm);
         long companyId = companyService.saveCompany(postForm);
         postService.savePost(postForm, companyId);
-        return "posts/post_detail";
+        return "mainboard";
     }
 
     @GetMapping("/{id}")

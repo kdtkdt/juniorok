@@ -116,6 +116,7 @@
                             </foreach>
                         </if>
                     </where>
+                 ORDER BY p.id DESC
                  LIMIT #{page}, #{size}
              ) AS sub
                  JOIN companies AS c ON sub.company_id = c.id
