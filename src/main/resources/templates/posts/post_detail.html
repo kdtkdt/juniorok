@@ -13,10 +13,10 @@
 <th:block th:fragment="post_detail">
     <div class="container-fluid" th:object="${post}">
         <div class="row mb-3">
-            <th:block th:insert="~{/posts/post_header::post_header}"></th:block>
+            <th:block th:insert="~{posts/post_header::post_header}"></th:block>
         </div>
         <div class="row mb-3">
-            <th:block th:insert="~{/posts/post_summary::post_summary}"></th:block>
+            <th:block th:insert="~{posts/post_summary::post_summary}"></th:block>
         </div>
         <div class="row mb-3">
 <!--            <th:block th:insert="~{/posts/post_info_etc::post_info_etc}" />-->
@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="row mb-3">
-            <th:block th:insert="~{/posts/post_benefits::post_benefits}"/>
+            <th:block th:insert="~{posts/post_benefits::post_benefits}"/>
         </div>
         <div class="row">
             <p>•&nbsp근무지:&nbsp<span th:id="companyLocation" th:text="${post.getLocation()}"></span></p>
