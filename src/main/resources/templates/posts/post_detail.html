@@ -28,7 +28,7 @@
             <th:block th:insert="~{/posts/post_benefits::post_benefits}"/>
         </div>
         <div class="row">
-            <p>•&nbsp근무지:&nbsp<span th:text="${post.getLocation()}"></span></p>
+            <p>•&nbsp근무지:&nbsp<span th:id="companyLocation" th:text="${post.getLocation()}"></span></p>
             <div th:insert="~{detailmap :: detailmap}"></div>
         </div>
     </div>

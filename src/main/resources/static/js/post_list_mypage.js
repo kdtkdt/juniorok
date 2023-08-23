@@ -62,6 +62,7 @@ $(document).ready(() => {
             },
             success: function (xhr, status, response) {
                 $('.modal-content').empty().append(response.responseText);
+                loc = $('#companyLocation').html();
             },
             error: function (xhr, status, error) {
                 alert('오류가 발생하였습니다. 나중에 다시 시도해주세요.');

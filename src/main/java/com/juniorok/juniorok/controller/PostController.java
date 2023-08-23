@@ -20,6 +20,7 @@ public class PostController {
 
     private final PostService postService;
     private final CompanyService companyService;
+    private final ApiConfig apiConfig;
 
 
     @GetMapping("/write")
@@ -43,8 +44,8 @@ public class PostController {
         Post post = postService.getPostById(id);
         model.addAttribute("post", post);
         //조회(현재는 근무지)
-        String inputDataname = post.getLocation();
-        model.addAttribute("inputDataname", inputDataname);
+        model.addAttribute("location", post.getLocation());
+        model.addAttribute("kakaoMapAppkey", apiConfig.getKakaoMapAppkey());
         return "posts/post_modal::post_details_modal";
     }
 
