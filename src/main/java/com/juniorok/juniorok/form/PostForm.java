@@ -1,5 +1,7 @@
 package com.juniorok.juniorok.form;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.Collections;
@@ -23,7 +25,8 @@ public record PostForm (
         URI techBlogUrl,
         URI homepageUrl,
         String requirements,
-        String preferredRequirements
+        String preferredRequirements,
+        MultipartFile logoFile
 ) {
     public static PostForm newInstance() {
         return new PostForm(
@@ -39,11 +42,12 @@ public record PostForm (
                 Collections.emptyList(),
                 Collections.emptyList(),
                 0,
-                0,
+                -1,
                 URI.create(""),
                 URI.create(""),
                 URI.create(""),
                 "",
-                "");
+                "",
+                null);
     }
 }
