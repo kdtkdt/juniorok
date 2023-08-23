@@ -39,7 +39,7 @@
           </div>
           <div class="col-1 d-flex align-items-center justify-content-center text-white">
             <th:block th:if="post.deadline != null">
-              <h5 th:text="|D-${T(java.time.temporal.ChronoUnit).DAYS.between(T(java.time.LocalDate).now(), post.deadline)}|"></h5>
+              <h5 class="text-nowrap" th:text="|D-${T(java.time.temporal.ChronoUnit).DAYS.between(T(java.time.LocalDate).now(), post.deadline)}|"></h5>
             </th:block>
             <th:block th:if="post.deadline == null">
               <h5 th:text="상시"></h5>
