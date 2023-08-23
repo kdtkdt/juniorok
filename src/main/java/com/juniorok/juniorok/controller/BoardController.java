@@ -15,16 +15,21 @@ public class BoardController {
     private final ApiConfig apiConfig;
 
     @GetMapping({"/main", "/"})
-    public String showMainBoard() {
+    public String showMainBoard(Model model) {
+        loadPosts(model);
         return "mainboard";
     }
 
     @GetMapping("/mypage")
     public String showMyPage(Model model) {
+        loadPosts(model);
+        return "mypage";
+    }
+
+    private void loadPosts(Model model) {
         model.addAttribute("posts", postService.getPage(1, 6, null, null));
         model.addAttribute("skills", postService.getAllSkills());
         model.addAttribute("kakaoMapAppkey", apiConfig.getKakaoMapAppkey());
-        return "mypage";
     }
 
 }
