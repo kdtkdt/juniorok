@@ -42,8 +42,8 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public List<Post> getPage(int page, int size) {
-        return postRepository.findPage((page - 1) * size, size);
+    public List<Post> getPage(int page, int size, String keyword, List<String> skills) {
+        return postRepository.findPage((page - 1) * size, size, keyword, skills);
     }
 
     @Transactional(readOnly = true)
@@ -58,7 +58,7 @@ public class PostService {
     public void deletePost(long postId){ postRepository.deletePost(postId); }
 
     @Transactional(readOnly = true)
-    public List<Skill> getAllSkillNames() {
-        return postRepository.findAllSkillNames();
+    public List<Skill> getAllSkills() {
+        return postRepository.findAllSkills();
     }
 }

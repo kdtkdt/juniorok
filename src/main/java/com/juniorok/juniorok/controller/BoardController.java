@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.time.LocalDate;
-
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
@@ -21,7 +19,8 @@ public class BoardController {
 
     @GetMapping("/mypage")
     public String showMyPage(Model model) {
-        model.addAttribute("posts", postService.getPage(1, 10));
+        model.addAttribute("posts", postService.getPage(1, 10, null, null));
+        model.addAttribute("skills", postService.getAllSkills());
         return "mypage";
     }
 

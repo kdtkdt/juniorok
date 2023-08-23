@@ -83,7 +83,7 @@
         <if test="postUrl != null" >#{postUrl}</if>)
     </insert>
 
-    <select id="findPage" parameterType="int" resultMap="postResultMap">
+    <select id="findPage" resultMap="postResultMap">
         SELECT sub.id AS id,
                sub.position AS position,
                sub.location AS location,
@@ -101,7 +101,22 @@
                         p.deadline,
                         p.company_id
                  FROM posts AS p
-                 LIMIT #{param1}, #{param2}
+                    <where>
+                        <if test="keyword != null and keyword != ''">
+                            AND (p.position LIKE concat('%', #{keyword}, '%') OR
+                            p.requirements LIKE concat('%', #{keyword}, '%') OR
+                            p.preferred_requirements LIKE concat('%', #{keyword}, '%'))
+                        </if>
+                        <if test="skills != null and skills.size() > 0">
+                            AND
+                            <foreach item="skill" collection="skills" open="(" close=")" separator="AND">
+                                (p.position LIKE CONCAT('%', #{skill}, '%') OR
+                                p.requirements LIKE CONCAT('%', #{skill}, '%') OR
+                                p.preferred_requirements LIKE CONCAT('%', #{skill}, '%'))
+                            </foreach>
+                        </if>
+                    </where>
+                 LIMIT #{page}, #{size}
              ) AS sub
                  JOIN companies AS c ON sub.company_id = c.id
                  LEFT JOIN position_skills AS ps ON ps.post_id = sub.id
@@ -152,7 +167,7 @@
         <result property="name" column="name" />
     </resultMap>
 
-    <select id="findAllSkillNames" resultMap="skillResultMap">
+    <select id="findAllSkills" resultMap="skillResultMap">
         SELECT * FROM skills;
     </select>
 

@@ -38,6 +38,7 @@ public class SecurityConfig {
                     {auth.requestMatchers(
                             new AntPathRequestMatcher("/"),
                             new AntPathRequestMatcher("/main"),
+                            new RegexRequestMatcher("^(/post/list)(\\?.*)?", "GET"),
                             new RegexRequestMatcher("/post/\\d+", "GET")).permitAll();
                     auth.requestMatchers(
                             new AntPathRequestMatcher("/post/write", "GET"),
