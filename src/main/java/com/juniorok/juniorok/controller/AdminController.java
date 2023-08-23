@@ -19,6 +19,12 @@ public class AdminController {
     private final CompanyService companyService;
 
 
+    @GetMapping("/admin/main")
+    public String adminmain(Model model){
+
+        return "admin_main";
+    }
+
     @GetMapping("/adminpost")
     public String showAdminBoard(Model model){
 
