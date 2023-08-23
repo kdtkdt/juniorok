@@ -13,6 +13,11 @@
         <result property="developers" column="developers" />
         <result property="revenue" column="revenue" />
         <result property="avgSalary" column="avg_salary" />
+        <association property="joinLeave">
+            <id property="id" column="join_leave_id"/>
+            <result property="join" column="join" />
+            <result property="leave" column="leave" />
+        </association>
         <collection property="addresses" ofType="com.juniorok.juniorok.dto.Address" >
             <id property="id" column="id"/>
             <result property="state" column="state" />
@@ -39,7 +44,8 @@
         <if test="employees != null" >employees,</if>
         <if test="developers != null" >developers,</if>
         <if test="revenue != null" >revenue,</if>
-        <if test="avgSalary != null" >avg_salary</if>)
+        <if test="avgSalary != null" >avg_salary,</if>
+        <if test="businessNumber != null" >business_number</if>)
         VALUES (
         <if test="name != null" >#{name},</if>
         <if test="ceo != null" >#{ceo},</if>
@@ -49,7 +55,8 @@
         <if test="employees != null" >#{employees},</if>
         <if test="developers != null" >#{developers},</if>
         <if test="revenue != null" >#{revenue},</if>
-        <if test="avgSalary != null" >#{avgSalary}</if>)
+        <if test="avgSalary != null" >#{avgSalary},</if>
+        <if test="businessNumber != null" >#{businessNumber}</if>)
         ON DUPLICATE KEY UPDATE
         <if test="ceo != null" >ceo = #{ceo},</if>
         <if test="introduction != null" >introduction = #{introduction},</if>
@@ -73,5 +80,20 @@
     <select id="findAllBenefitTags" resultMap="benefitResultMap">
         SELECT * FROM benefits;
     </select>
+
+    <insert id="saveBenefits" parameterType="long">
+        INSERT INTO provided_benefits(company_id, benefit_id)
+        VALUES (#{param1}, #{param2})
+    </insert>
+
+    <insert id="saveAddress" parameterType="com.juniorok.juniorok.dto.Address">
+        INSERT INTO addresses (company_id, state, city, others)
+        VALUES (#{company.id}, #{state}, #{city}, #{others})
+    </insert>
+
+    <insert id="saveJoinLeave" parameterType="com.juniorok.juniorok.dto.JoinLeave">
+        INSERT INTO join_leaves (company_id, year, month, `join`, `leave`)
+        VALUES (#{company.id}, #{year}, #{month}, #{join}, #{leave})
+    </insert>
 
 </mapper>

@@ -38,8 +38,14 @@ public class PostService {
                 .build();
     }
 
+    @Transactional(readOnly = true)
     public List<Post> getPage(int page, int size) {
         return postRepository.findPage((page - 1) * size, size);
+    }
+
+    @Transactional(readOnly = true)
+    public Post getPostById(long postId) {
+        return postRepository.findById(postId);
     }
 
     

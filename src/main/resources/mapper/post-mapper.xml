@@ -5,7 +5,7 @@
     <resultMap id="postResultMap" type="com.juniorok.juniorok.domain.Post">
         <id property="id" column="id" />
         <result property="position" column="position" />
-        <result property="startedAt" column="startedAt" />
+        <result property="startedAt" column="started_at" />
         <result property="deadline" column="deadline" />
         <result property="location" column="location" />
         <result property="minSalary" column="min_salary" />
@@ -16,8 +16,8 @@
         <result property="recommended" column="recommended" />
         <result property="deleted" column="deleted" />
         <association property="company" javaType="com.juniorok.juniorok.domain.Company" >
-            <id property="id" column="id" />
-            <result property="name" column="name" />
+            <id property="id" column="company_id" />
+            <result property="name" column="company_name" />
             <result property="ceo" column="ceo" />
             <result property="introduction" column="introduction" />
             <result property="homepage" column="homepage" />
@@ -26,6 +26,11 @@
             <result property="developers" column="developers" />
             <result property="revenue" column="revenue" />
             <result property="avgSalary" column="avg_salary" />
+            <association property="joinLeave">
+                <id property="id" column="join_leave_id"/>
+                <result property="join" column="join" />
+                <result property="leave" column="leave" />
+            </association>
             <collection property="addresses" ofType="com.juniorok.juniorok.dto.Address" >
                 <id property="id" column="id"/>
                 <result property="state" column="state" />
@@ -33,21 +38,21 @@
                 <result property="others" column="others" />
             </collection>
             <collection property="skills" ofType="com.juniorok.juniorok.dto.Skill">
-                <id property="id" column="id" />
-                <result property="name" column="name" />
+                <id property="id" column="skill_id" />
+                <result property="name" column="skill_name" />
             </collection>
             <collection property="benefits" ofType="com.juniorok.juniorok.dto.Benefit">
-                <id property="id" column="id" />
-                <result property="name" column="name" />
+                <id property="id" column="benefit_id" />
+                <result property="name" column="benefit_name" />
             </collection>
         </association>
         <association property="jobType" javaType="com.juniorok.juniorok.dto.JobType" >
-            <id property="id" column="id" />
-            <result property="name" column="name" />
+            <id property="id" column="job_type_id" />
+            <result property="name" column="job_type_name" />
         </association>
         <collection property="positionSkills" ofType="com.juniorok.juniorok.dto.Skill" >
-            <id property="id" column="id" />
-            <result property="name" column="name" />
+            <id property="id" column="position_skill_id" />
+            <result property="name" column="position_skill_name" />
         </collection>
     </resultMap>
 
@@ -79,14 +84,28 @@
     </insert>
 
     <select id="findPage" parameterType="int" resultMap="postResultMap">
-        SELECT p.id, p.position, p.location, p.recommended, p.deadline,
-               c.id, c.name, c.avg_salary
+        SELECT p.id AS id, p.position AS position, p.location AS location, p.recommended AS recommended, p.deadline AS deadline,
+               c.id AS company_id, c.name AS company_name, c.avg_salary / 10000 AS avg_salary
         FROM posts AS p
         JOIN companies AS c ON p.company_id = c.id
         LIMIT #{param1}, #{param2}
     </select>
 
-
+    <select id="findById" parameterType="long" resultMap="postResultMap">
+        SELECT p.id AS id, p.company_id AS company_id, p.job_type_id, p.position AS position,
+               p.started_at AS started_at, p.deadline AS deadline, p.location AS location,
+               p.min_salary, p.max_salary, p.requirements, p.preferred_requirements, p.post_url, p.recommended, p.deleted,
+               c.name AS company_name, c.avg_salary / 10000 AS avg_salary, c.employees AS employees, c.developers AS developers,
+               c.homepage AS homepage, c.tech_blog AS tech_blog,
+               b.id AS benefit_id, b.name AS benefit_name,
+               jl.`join` AS `join`, jl.`leave` AS `leave`
+        FROM posts AS p
+        JOIN companies AS c ON p.company_id = c.id
+        LEFT JOIN provided_benefits AS pb ON pb.company_id = c.id
+        LEFT JOIN benefits AS b ON pb.benefit_id = b.id
+        LEFT JOIN join_leaves AS jl ON c.id = jl.company_id
+        WHERE p.id = #{id}
+    </select>
 
 
     <!--어드민 게시글 전부 불러옴-->

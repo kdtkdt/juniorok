@@ -2,6 +2,7 @@ package com.juniorok.juniorok.domain;
 
 import com.juniorok.juniorok.dto.Address;
 import com.juniorok.juniorok.dto.Benefit;
+import com.juniorok.juniorok.dto.JoinLeave;
 import com.juniorok.juniorok.dto.Skill;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +27,8 @@ public class Company {
     private int developers;
     private long revenue;
     private long avgSalary;
+    private long businessNumber;
+    private JoinLeave joinLeave;
     private List<Address> addresses;
     private List<Skill> skills;
     private List<Benefit> benefits;

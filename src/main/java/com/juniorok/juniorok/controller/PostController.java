@@ -1,15 +1,13 @@
 package com.juniorok.juniorok.controller;
 
+import com.juniorok.juniorok.domain.Post;
 import com.juniorok.juniorok.form.PostForm;
 import com.juniorok.juniorok.service.CompanyService;
 import com.juniorok.juniorok.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -32,5 +30,12 @@ public class PostController {
         long companyId = companyService.saveCompany(postForm);
         postService.savePost(postForm, companyId);
         return "posts/post_detail";
+    }
+
+    @GetMapping("/{id}")
+    public String showPostDetail(@PathVariable long id, Model model) {
+        Post post = postService.getPostById(id);
+        model.addAttribute("post", post);
+        return "posts/post_modal::post_details_modal";
     }
 }

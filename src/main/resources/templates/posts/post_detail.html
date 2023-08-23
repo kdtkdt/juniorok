@@ -11,7 +11,7 @@
 <th:block th:insert="~{header :: header}"></th:block>
 <div class="container">
 <th:block th:fragment="post_detail">
-    <div class="container-fluid">
+    <div class="container-fluid" th:object="${post}">
         <div class="row mb-3">
             <th:block th:insert="~{/posts/post_header::post_header}"></th:block>
         </div>
@@ -19,7 +19,7 @@
             <th:block th:insert="~{/posts/post_summary::post_summary}"></th:block>
         </div>
         <div class="row mb-3">
-            <th:block th:insert="~{/posts/post_info_etc::post_info_etc}" />
+<!--            <th:block th:insert="~{/posts/post_info_etc::post_info_etc}" />-->
             <div class="text-center">
                 <a class="btn btn-outline-danger">잘못된 내용 신고하기🚨</a>
             </div>
@@ -28,6 +28,7 @@
             <th:block th:insert="~{/posts/post_benefits::post_benefits}"/>
         </div>
         <div class="row">
+            <p>•&nbsp근무지:&nbsp<span th:text="${post.getLocation()}"></span></p>
             <th:block th:fragment="~{detailmap::detailmap}"></th:block>
             <img th:src="@{/img/map_dummy.png}"/>
         </div>
