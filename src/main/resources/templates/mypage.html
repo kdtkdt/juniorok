@@ -8,6 +8,12 @@
     <script th:src="@{/js/post_list_mypage.js}"></script>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/css/post_list_card_style.css}" rel="stylesheet">
+
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script type="text/javascript"
+            th:src="@{'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + __${kakaoMapAppkey}__ + '&libraries=services'}"></script>
+
+
 </head>
 <body>
 <th:block th:insert="~{header :: header}">Header</th:block>

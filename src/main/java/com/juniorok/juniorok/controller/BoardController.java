@@ -1,5 +1,6 @@
 package com.juniorok.juniorok.controller;
 
+import com.juniorok.juniorok.config.ApiConfig;
 import com.juniorok.juniorok.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 public class BoardController {
 
     private final PostService postService;
+    private final ApiConfig apiConfig;
 
     @GetMapping({"/main", "/"})
     public String showMainBoard() {
@@ -22,6 +24,7 @@ public class BoardController {
     @GetMapping("/mypage")
     public String showMyPage(Model model) {
         model.addAttribute("posts", postService.getPage(1, 10));
+        model.addAttribute("kakaoMapAppkey", apiConfig.getKakaoMapAppkey());
         return "mypage";
     }
 

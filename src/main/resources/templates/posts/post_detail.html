@@ -29,8 +29,7 @@
         </div>
         <div class="row">
             <p>•&nbsp근무지:&nbsp<span th:text="${post.getLocation()}"></span></p>
-            <th:block th:fragment="~{detailmap::detailmap}"></th:block>
-            <img th:src="@{/img/map_dummy.png}"/>
+            <div th:insert="~{detailmap :: detailmap}"></div>
         </div>
     </div>
     <th:block th:if="${#ctx.springRequestContext.requestUri} == '/post'">
