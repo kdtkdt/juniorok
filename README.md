@@ -2,8 +2,10 @@
   <img src="https://github.com/kdtkdt/juniorok/assets/135004614/7c573a63-c281-4ca3-ae46-3926112b9239">
 </p>
 
-![Static Badge](https://img.shields.io/badge/jQuery-0769AD?logo=jquery&logoColor=white)
+![Static Badge](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![Static Badge](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white)
+![Static Badge](https://img.shields.io/badge/jQuery-0769AD?logo=jquery&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/Bootstrap-7952B3?logo=bootstrap&logoColor=white)  
   
 ![Static Badge](https://img.shields.io/badge/SpringBoot-6DB33F?logo=springboot&logoColor=white)
