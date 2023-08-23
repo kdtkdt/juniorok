@@ -1,5 +1,6 @@
 package com.juniorok.juniorok.controller;
 
+import com.juniorok.juniorok.config.ApiConfig;
 import com.juniorok.juniorok.domain.Post;
 import com.juniorok.juniorok.form.PostForm;
 import com.juniorok.juniorok.service.CompanyService;
@@ -19,6 +20,7 @@ public class PostController {
 
     private final PostService postService;
     private final CompanyService companyService;
+
 
     @GetMapping("/write")
     public String showPostWriteForm(Model model) {
@@ -40,6 +42,9 @@ public class PostController {
     public String showPostDetail(@PathVariable long id, Model model) {
         Post post = postService.getPostById(id);
         model.addAttribute("post", post);
+        //조회(현재는 근무지)
+        String inputDataname = post.getLocation();
+        model.addAttribute("inputDataname", inputDataname);
         return "posts/post_modal::post_details_modal";
     }
 

@@ -52,6 +52,7 @@ public class SecurityConfig {
                             new AntPathRequestMatcher("/post/update/**", "GET"),
                             new AntPathRequestMatcher("/admin/**", "GET"),
                             new AntPathRequestMatcher("/adminusers", "GET"),
+                            new AntPathRequestMatcher("/admin/main", "GET"),
                             new AntPathRequestMatcher("/user/**", "GET"),
                             new AntPathRequestMatcher("/user/deleteUser/**", "GET"),
                             new AntPathRequestMatcher("/user/bulkDeleteUsers", "GET"),
