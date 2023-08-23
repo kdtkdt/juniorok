@@ -16,7 +16,11 @@
 
     <script th:src="@{/js/jquery-3.7.0.min.js}"></script>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-
+<style>
+    a{
+        text-decoration: none;
+    }
+</style>
 
 </head>
 <body class="sb-nav-fixed">
@@ -26,15 +30,12 @@
 <div th:insert="~{admin_header :: adminheader}"></div>
 
 
-<!-- 어드민 기본 전체 다 들어있는거. 안찌그러짐-->
-
-
 <div id="layoutSidenav">
 
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Dashboard</h1>
+                <h1 class="mt-4">전체 관리</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">관리자페이지 입니다.</li>
                 </ol>
@@ -43,39 +44,39 @@
 
                 <div class="row">
 
-                    <!-- 상단 카드들 // 나중에 신고 수, 뱃지 그런거 넣으면 되려나?-->
+                    <!-- 상단 카드들 -->
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-primary text-white mb-4">
-                            <div class="card-body">Primary Card</div>
+                            <div class="card-body"> <span th:text="${usercount}"></span> 명</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <a class="small text-white stretched-link" href="/user/adminusers"> 오늘 가입한 회원 입니다.</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-warning text-white mb-4">
-                            <div class="card-body">Warning Card</div>
+                            <div class="card-body"><span th:text="${getPostStartAt}"></span> 건 </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <a class="small text-white stretched-link" href="/adminpost">오늘 모집을 시작한 공고 입니다.</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-success text-white mb-4">
-                            <div class="card-body">Success Card</div>
+                            <div class="card-body"><span th:text="${getPostDeadlineToday}"></span> 건</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <a class="small text-white stretched-link" href="/adminpost">오늘이 마감인 공고 입니다.</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <div class="card bg-danger text-white mb-4">
-                            <div class="card-body">Danger Card</div>
+                            <div class="card-body"><span th:text="${reportremaincount}"></span> 건</div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <a class="small text-white stretched-link" href="/post/report">처리가 필요한 신고건 입니다.</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -91,18 +92,44 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-chart-area me-1"></i>
-                                Area Chart Example
+                                금일 마감 공고(최근 3건)
                             </div>
-                            <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+
+
+                            <div class="card-body">
+
+                                <div class="container">
+
+                                    <div th:each="post : ${todayDeadlinePosts}" class="row">
+                                        <div class="col">
+                                            ⏳ [ <span th:text="${post.getCompany().getName()}"></span> ] 의 채용 포지션 [
+                                            <span th:text="${post.position}"></span> ]
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
                         </div>
                     </div>
                     <div class="col-xl-6">
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-chart-bar me-1"></i>
-                                Bar Chart Example
+                                신고 처리(최근 3건)
                             </div>
-                            <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                            <div class="card-body">
+
+                            <div class="recentReports">
+                                <div th:each="report : ${recentReports}" class="row">
+                                    <div class="col">
+                                        🚨 신고건 : [ <span th:text="${report.companyname}"></span> : <span th:text="${report.reason}"></span> ]
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -114,43 +141,22 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        DataTable Example
+                        새롭게 올라온 공고(최근 3건)
                     </div>
                     <div class="card-body">
-                        <table id="datatablesSimple">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                            </thead>
+
+                        <div class="container">
+
+                            <div th:each="post : ${recentPost}" class="row">
+                                <div class="col">
+                                    ✅ [ <span th:text="${post.getCompany().getName()}"></span> ] 의 채용 포지션 [
+                                    <span th:text="${post.position}"></span> ]
+                                </div>
+
+                            </div>
+                        </div>
 
 
-                            <!-- 더미데이터-->
-                            <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                            </tr>
-
-                            <tr>
-                                <td>Donna Snider</td>
-                                <td>Customer Support</td>
-                                <td>New York</td>
-                                <td>27</td>
-                                <td>2011/01/25</td>
-                                <td>$112,000</td>
-                            </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>

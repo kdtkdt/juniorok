@@ -56,7 +56,9 @@
         </foreach>
     </update>
 
-
+    <select id="getUsersJoinedTodayCount" resultType="int">
+        SELECT COUNT(*) FROM users WHERE DATE(created_at) = curdate()
+    </select>
 
 
 </mapper>

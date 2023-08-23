@@ -54,4 +54,7 @@ public class UserService {
         return userRepository.getTotalUsersCountByQuery(query);
     }
 
+    //오늘가입자
+    public int getUsersJoinedTodayCount(){return userRepository.getUsersJoinedTodayCount();}
+
 }

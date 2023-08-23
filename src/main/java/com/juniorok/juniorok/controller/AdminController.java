@@ -1,8 +1,8 @@
 package com.juniorok.juniorok.controller;
 
-import com.juniorok.juniorok.form.PostForm;
-import com.juniorok.juniorok.service.CompanyService;
+
 import com.juniorok.juniorok.service.PostService;
+import com.juniorok.juniorok.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +16,21 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
     private final PostService postService;
-    private final CompanyService companyService;
+    private final UserService userService;
 
 
     @GetMapping("/admin/main")
     public String adminmain(Model model){
+
+
+        model.addAttribute("todayDeadlinePosts", postService.todayDeadlinePosts());
+        model.addAttribute("recentReports", postService.recentReports());
+        model.addAttribute("recentPost", postService.recentPost());
+        model.addAttribute("reportremaincount", postService.reportremaincount());
+        model.addAttribute("getPostDeadlineToday", postService.getPostDeadlineToday());
+        model.addAttribute("getPostStartAt", postService.getPostStartAt());
+        model.addAttribute("usercount", userService.getUsersJoinedTodayCount());
+
 
         return "admin_main";
     }

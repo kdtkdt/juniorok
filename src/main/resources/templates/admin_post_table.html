@@ -3,9 +3,9 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Dashboard</h1>
+                <h1 class="mt-4">공고 관리</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Dashboard</li>
+                    <li class="breadcrumb-item active">공고조회</li>
                 </ol>
 
 
@@ -13,9 +13,13 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        DataTable Example
+                        현재 게시된 공고입니다.
                     </div>
                     <div class="card-body">
+
+
+                    <!--데이터확인용-->
+                    <!--<span th:text="${posts}"></span>-->
 
                         <table id="datatablesSimple">
                             <thead>
@@ -35,7 +39,11 @@
                                 <td th:text="${post.company.name}"></td>
                                 <td th:text="${post.position}"></td>
                                 <td th:text="${post.deadline}"></td>
-                                <td><button class="btn btn-outline-primary" th:attr="data-post-id=${post.id}">수 정</button></td>
+<!--                                <td><button class="btn btn-outline-primary" th:attr="data-post-id=${post.id}">수 정</button></td>-->
+<!--                                <td><button class="btn btn-outline-secondary delete-button" th:attr="data-post-id=${post.id}">삭 제</button></td>-->
+
+                                <td><button class="btn btn-outline-primary modify-button" th:attr="data-post-id=${post.id}">수정</button></td>
+
                                 <td><button class="btn btn-outline-secondary delete-button" th:attr="data-post-id=${post.id}">삭 제</button></td>
                             </tr>
                             </tbody>

@@ -20,6 +20,14 @@
                 }
             });
 
+            $(document).ready(function() {
+                $(".modify-button").click(function() {
+                    var postId = $(this).data("post-id");
+                    window.location.href = "/post/modify/" + postId;
+                });
+            });
+
+
         });
     </script>
 </th:block>

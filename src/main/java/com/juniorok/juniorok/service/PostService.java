@@ -3,6 +3,7 @@ package com.juniorok.juniorok.service;
 import com.juniorok.juniorok.domain.Company;
 import com.juniorok.juniorok.domain.Post;
 import com.juniorok.juniorok.dto.JobType;
+import com.juniorok.juniorok.dto.Reports;
 import com.juniorok.juniorok.dto.Skill;
 import com.juniorok.juniorok.form.PostForm;
 import com.juniorok.juniorok.repository.PostRepository;
@@ -61,4 +62,23 @@ public class PostService {
     public List<Skill> getAllSkills() {
         return postRepository.findAllSkills();
     }
+
+    //오늘시작공고
+    public int getPostStartAt(){return postRepository.getPostStartAt();}
+
+    //오늘마감공고
+    public int getPostDeadlineToday(){return postRepository.getPostDeadlineToday();}
+
+    //오늘마감 공고데이터
+    public List<Post> todayDeadlinePosts(){return postRepository.todayDeadlinePosts();}
+
+    //처리해야할신고건수
+    public int reportremaincount(){return postRepository.reportremaincount();}
+
+    //최근신고건3건
+    public List<Reports> recentReports(){return  postRepository.recentReports();}
+
+    //최근공고3개
+    public List<Post> recentPost(){return postRepository.recentPost();}
+
 }
