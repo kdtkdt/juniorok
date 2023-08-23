@@ -84,14 +84,28 @@
     </insert>
 
     <select id="findPage" parameterType="int" resultMap="postResultMap">
-        SELECT p.id AS id, p.position AS position, p.location AS location, p.recommended AS recommended, p.deadline AS deadline,
-               c.id AS company_id, c.name AS company_name, c.avg_salary / 10000 AS avg_salary,
+        SELECT sub.id AS id,
+               sub.position AS position,
+               sub.location AS location,
+               sub.recommended AS recommended,
+               sub.deadline AS deadline,
+               c.id AS company_id,
+               c.name AS company_name,
+               c.avg_salary / 10000 AS avg_salary,
                s.name AS position_skill_name
-        FROM posts AS p
-        JOIN companies AS c ON p.company_id = c.id
-        LEFT JOIN position_skills AS ps ON ps.post_id = p.id
-        LEFT JOIN skills AS s ON s.id = ps.skill_id
-        LIMIT #{param1}, #{param2}
+        FROM (
+                 SELECT p.id,
+                        p.position,
+                        p.location,
+                        p.recommended,
+                        p.deadline,
+                        p.company_id
+                 FROM posts AS p
+                 LIMIT #{param1}, #{param2}
+             ) AS sub
+                 JOIN companies AS c ON sub.company_id = c.id
+                 LEFT JOIN position_skills AS ps ON ps.post_id = sub.id
+                 LEFT JOIN skills AS s ON s.id = ps.skill_id
     </select>
 
     <select id="findIdByPositionAndCompanyId" >
