@@ -1,4 +1,6 @@
-![image](https://github.com/kdtkdt/juniorok/assets/135004614/7c573a63-c281-4ca3-ae46-3926112b9239)
+<p align="center">
+  <img src="https://github.com/kdtkdt/juniorok/assets/135004614/7c573a63-c281-4ca3-ae46-3926112b9239">
+</p>
 
 ![Static Badge](https://img.shields.io/badge/jQuery-0769AD?logo=jquery&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white)
@@ -40,7 +42,10 @@
 ## 회원
 - Github 로그인 : Github 로고만 있으면 로그인 버튼인지 알아차리기 힘들어, 다른 소셜 로그인 아이콘과 함께 배치하고 지원 예정임을 표시하였습니다.
 - 역할별 접근 권한 부여 : 관리자, 작성자만 공고를 작성할 수 있도록 권한이 부여됩니다.
-![image](https://github.com/kdtkdt/juniorok/assets/135004614/17db884a-6b9d-4c5e-a0ff-9a079f5d5e20)
+
+<p align="center">
+  <img src="https://github.com/kdtkdt/juniorok/assets/135004614/17db884a-6b9d-4c5e-a0ff-9a079f5d5e20">
+</p>
 
 ## 메인페이지
 - 공고 목록 조회 : 회사, 기술스택, 지역, 연봉, 모집기한이 표시됩니다.
@@ -83,4 +88,6 @@
 ### 사이드바 
 - 유저 편의를 위하여 메인페이지에서 다양한 사이트로 이동가능하도록 만들었습니다.
 
-![image](https://github.com/kdtkdt/juniorok/assets/135004614/7d546de9-12fa-4da4-b526-829e2818dcaf)
+<p align="center">
+  <img src="https://github.com/kdtkdt/juniorok/assets/135004614/7d546de9-12fa-4da4-b526-829e2818dcaf">
+</p>
