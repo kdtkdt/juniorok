@@ -22,7 +22,19 @@
     <div class="row">
         <h3 class="text-decoration-underline text-center">북마크 목록</h3>
     </div>
-    <th:block th:insert="~{/posts/post_list_card::post_list_card}" />
+    <div class="input-group mb-3">
+        <input id="keyword" type="text" class="form-control" placeholder="키워드 검색" aria-label="키워드 검색" aria-describedby="search-button">
+        <button class="btn btn-outline-secondary" type="button" id="search-button">🔍</button>
+    </div>
+    <div id="skillsContainer" class="mb-3">
+        <th:block th:each="skill : ${skills}">
+            <input th:type="checkbox" class="btn-check" th:id="|skill${skill.getId()}|" autocomplete="off" th:field="*{skills}" th:value="${skill.getName()}">
+            <label class="btn btn-outline-secondary" th:for="|skill${skill.getId()}|" th:text="${skill.getName()}"></label>
+        </th:block>
+    </div>
+    <div id="postListContainer" class="container-fluid">
+        <th:block th:insert="~{/posts/post_list_card::post_list_card}" />
+    </div>
     <div class="modal fade" id="postDetailsModal" tabindex="-1" aria-labelledby="postDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl modal-fullscreen-sm-down">
             <div class="modal-content">

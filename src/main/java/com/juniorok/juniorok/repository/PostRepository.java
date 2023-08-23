@@ -12,7 +12,7 @@ import java.util.List;
 public interface PostRepository {
     void save(Post post);
 
-    List<Post> findPage(int page, int size);
+    List<Post> findPage(@Param("page") int page, @Param("size") int size, @Param("keyword") String keyword, @Param("skills") List<String> skills);
     long findIdByPositionAndCompanyId(String position, long companyId);
     Post findById(long id);
 
@@ -21,7 +21,7 @@ public interface PostRepository {
     List<Post>  getAllPosts();
     //admin-게시글삭제
     void deletePost(long postId);
-    List<Skill> findAllSkillNames();
+    List<Skill> findAllSkills();
     void savePositionSkills(long postId, long skillId);
 
 }

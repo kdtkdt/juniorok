@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.List;
+
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/post")
@@ -23,7 +26,7 @@ public class PostController {
     public String showPostWriteForm(Model model) {
         model.addAttribute("postForm", PostForm.newInstance());
         model.addAttribute("benefits", companyService.getAllBenefitTags());
-        model.addAttribute("skills", postService.getAllSkillNames());
+        model.addAttribute("skills", postService.getAllSkills());
         return "posts/post_write";
     }
 
@@ -43,5 +46,16 @@ public class PostController {
         String inputDataname = post.getLocation();
         model.addAttribute("inputDataname", inputDataname);
         return "posts/post_modal::post_details_modal";
+    }
+
+    @GetMapping("/list")
+    public String showPostList(Model model,
+                                        @RequestParam(name = "skills") String skills,
+                                        @RequestParam(name = "keyword") String keyword,
+                                        @RequestParam(name = "page", defaultValue = "1") int page) {
+        var posts = postService.getPage(page, 10, keyword,
+                skills.isEmpty() ? Collections.emptyList() : List.of(skills.split(",")));
+        model.addAttribute("posts", posts);
+        return "posts/post_list_card::post_list_card";
     }
 }
