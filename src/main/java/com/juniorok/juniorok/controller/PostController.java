@@ -54,7 +54,7 @@ public class PostController {
                                         @RequestParam(name = "skills") String skills,
                                         @RequestParam(name = "keyword") String keyword,
                                         @RequestParam(name = "page", defaultValue = "1") int page) {
-        var posts = postService.getPage(page, 10, keyword,
+        var posts = postService.getPage(page, 6, keyword,
                 skills.isEmpty() ? Collections.emptyList() : List.of(skills.split(",")));
         model.addAttribute("posts", posts);
         return "posts/post_list_card::post_list_card";
