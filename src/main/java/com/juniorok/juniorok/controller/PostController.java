@@ -21,6 +21,7 @@ public class PostController {
     public String showPostWriteForm(Model model) {
         model.addAttribute("postForm", PostForm.newInstance());
         model.addAttribute("benefits", companyService.getAllBenefitTags());
+        model.addAttribute("skills", postService.getAllSkillNames());
         return "posts/post_write";
     }
 

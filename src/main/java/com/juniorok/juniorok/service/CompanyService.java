@@ -29,8 +29,8 @@ public class CompanyService {
             company.setAvgSalary(nationalPensionApi.getRecentAverageSalary(postForm.businessNumber(), postForm.companyName()));
         }
         companyRepository.save(company);
-        postForm.benefits().forEach(benefitId -> companyRepository.saveBenefits(company.getId(), Long.getLong(benefitId)));
         long companyId = companyRepository.findIdByName(company.getName());
+        postForm.benefits().forEach(benefitId -> companyRepository.saveBenefits(companyId, Long.parseLong(benefitId)));
         company.setId(companyId);
         if (businessNumber > 1_000_000_000) {
             companyRepository.saveAddress(extractAddressInfo(company));
