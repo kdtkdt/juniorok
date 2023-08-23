@@ -1,3 +1,5 @@
+![junior-ok-logo-color-transparent-background](https://github.com/kdtkdt/juniorok/assets/135004614/73d00dfe-075a-4026-beb4-1579d3686fcf)
+
 # juniorok
 
 ## 작업 목록
