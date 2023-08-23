@@ -5,7 +5,7 @@
     <title>board</title>
 </head>
 <body>
-<div th:fragment="board" class="container">
+<div th:fragment="board" th:each="post, s : ${posts}" class="container">
 
     <div class="container">
             <section class="content">
@@ -14,7 +14,7 @@
                             <div class="table-container">
                                 <table class="table table-filter">
                                     <tbody>
-                                    <tr data-status="HTML" data-status1="CSS">
+                                    <tr data-status="" data-status1="" >
                                         <td></td>
                                         <td>
                                             <a href="javascript:;" class="star">
@@ -24,121 +24,23 @@
                                         <td>
                                             <div class="media">
                                                 <a href="#" class="pull-left">
-                                                    <img src="https://m.segye.com/content/image/2022/04/04/20220404514213.jpg" class="media-photo">
+                                                    <img th:src="@{/img/company.svg}" class="media-photo">
                                                 </a>
                                                 <div class="media-body">
-                                                    <span class="media-meta pull-right">2023-08-18</span>
-                                                    <h4 class="title">
-                                                        프론트 개발자
-                                                        <span class="pull-right HTML, CSS">(HTML, CSS)</span>
-                                                    </h4>
-                                                    <p class="summary">스마일게이트</p>
-                                                    <p class="summary">지역:수원 연봉:3500</p>
+                                                    <span class="media-meta pull-right" th:text="|D-${T(java.time.temporal.ChronoUnit).DAYS.between(T(java.time.LocalDate).now(), post.deadline)}|">2023-08-18</span>
+                                                    <th:block th:each="positionSkill, s : ${post.getPositionSkills()}">
+                                                        <th:block th:if="${s.count <= 3}">
+                                                    <h4 class="title"><span class="pull-right HTML, CSS" th:text="${positionSkill.getName()}"></span></h4>
+                                                        </th:block>
+                                                    </th:block>
+                                                    <h4 class="title" th:text="${post.Position}"></h4>
+                                                    <p class="summary1" th:text="${post.getCompany().getName()}"></p>
+                                                    <p class="summary">지역: <span th:text="${post.location}"></span>
+                                                        <span class="summary2" th:if="${post.getCompany().getAvgSalary() != null}" th:text="|평균연봉: ${post.getCompany().getAvgSalary()}|"></span></p>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-
-                                    <tr data-status="CSS">
-                                        <td></td>
-                                        <td>
-                                            <a href="javascript:;" class="star">
-                                                <i class="glyphicon glyphicon-star"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="media">
-                                                <a href="#" class="pull-left">
-                                                    <img src="https://images.samsung.com/kdp/aboutsamsung/brand_identity/logo/360_197_1.png?$FB_TYPE_B_PNG$" class="media-photo">
-                                                </a>
-                                                <div class="media-body">
-                                                    <span class="media-meta pull-right">2323-08-18</span>
-                                                    <h4 class="title">
-                                                        프론트 개발자
-                                                        <span class="pull-right CSS">(CSS)</span>
-                                                    </h4>
-                                                    <p class="summary">삼성</p>
-                                                    <p class="summary">지역:서울 연봉:4500</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr data-status="JavaScripts">
-                                        <td></td>
-                                        <td>
-                                            <a href="javascript:;" class="star">
-                                                <i class="glyphicon glyphicon-star"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="media">
-                                                <a href="#" class="pull-left">
-                                                    <img src="https://play-lh.googleusercontent.com/tlG4t6Cb9ZiUTeDJzkVzVHiqIq84y-boCi6MGbQRmckU4mCgcIVTHappSofJxNE2nAg" class="media-photo">
-                                                </a>
-                                                <div class="media-body">
-                                                    <span class="media-meta pull-right">2023-08-18</span>
-                                                    <h4 class="title">
-                                                        풀스택 개발자
-                                                        <span class="pull-right JavaScripts">(JavaScripts)</span>
-                                                    </h4>
-                                                    <p class="summary">멀티캠퍼스</p>
-                                                    <p class="summary">지역:서울 연봉:3000</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr data-status="HTML" data-status1="CSS">
-                                        <td></td>
-                                        <td>
-                                            <a href="javascript:;" class="star">
-                                                <i class="glyphicon glyphicon-star"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="media">
-                                                <a href="#" class="pull-left">
-                                                    <img src="https://img.etnews.com/photonews/2112/1483817_20211214124658_464_0001.jpg" class="media-photo">
-                                                </a>
-                                                <div class="media-body">
-                                                    <span class="media-meta pull-right">2023-08-18</span>
-                                                    <h4 class="title">
-                                                        풀스택 개발자
-                                                        <span class="pull-right HTML, CSS">(HTML, CSS, SpringBoot, React)</span>
-                                                    </h4>
-                                                    <p class="summary">넥슨</p>
-                                                    <p class="summary">지역:서울 연봉:4000</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr data-status="CSS">
-                                        <td></td>
-                                        <td>
-                                            <a href="javascript:;" class="star">
-                                                <i class="glyphicon glyphicon-star"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="media">
-                                                <a href="#" class="pull-left">
-                                                    <img src="https://www.hyundai.co.kr/resources/assets/img/common/motor_logo.png" class="media-photo">
-                                                </a>
-                                                <div class="media-body">
-                                                    <span class="media-meta pull-right">2023-08-18</span>
-                                                    <h4 class="title">
-                                                        백엔드 개발자
-                                                        <span class="pull-right CSS">(CSS)</span>
-                                                    </h4>
-                                                    <p class="summary">현대</p>
-                                                    <p class="summary">지역:판교 연봉:5000</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-
                                     </tbody>
                                 </table>
                             </div>

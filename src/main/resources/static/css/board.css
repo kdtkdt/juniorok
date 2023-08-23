@@ -67,4 +67,13 @@
 }
 .table-filter .media .summary {
     font-size: 14px;
+    color: #000000;
+}
+.table-filter .media .summary1 {
+    font-size: 14px;
+    color: #4e6df1;
+}
+.table-filter .media .summary2 {
+    font-size: 14px;
+    color: #ff0000;
 }
