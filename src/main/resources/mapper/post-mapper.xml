@@ -148,10 +148,18 @@
 
     <!--어드민 게시글 전부 불러옴-->
     <select id="getAllPosts" resultMap="postResultMap">
-        SELECT p.id, p.position, p.location, p.recommended, p.deadline,
-               c.id, c.name, c.avg_salary
+        SELECT p.id AS id, p.company_id AS company_id, p.job_type_id, p.position AS position,
+               p.started_at AS started_at, p.deadline AS deadline, p.location AS location,
+               p.min_salary, p.max_salary, p.requirements, p.preferred_requirements, p.post_url, p.recommended, p.deleted,
+               c.name AS company_name, c.avg_salary / 10000 AS avg_salary, c.employees AS employees, c.developers AS developers,
+               c.homepage AS homepage, c.tech_blog AS tech_blog,
+               b.id AS benefit_id, b.name AS benefit_name,
+               jl.`join` AS `join`, jl.`leave` AS `leave`
         FROM posts AS p
-                 JOIN companies AS c ON p.company_id = c.id
+            JOIN companies AS c ON p.company_id = c.id
+            LEFT JOIN provided_benefits AS pb ON pb.company_id = c.id
+            LEFT JOIN benefits AS b ON pb.benefit_id = b.id
+            LEFT JOIN join_leaves AS jl ON c.id = jl.company_id
         where p.deleted=0
         ORDER BY p.id DESC
     </select>
@@ -175,5 +183,55 @@
         INSERT INTO position_skills VALUES (#{param1}, #{param2})
     </insert>
 
+
+<!--    오늘시작공고수-->
+    <select id="getPostStartAt" resultType="int">
+        SELECT COUNT(*) FROM posts WHERE DATE(started_at) = curdate()
+    </select>
+
+    <!--    오늘마감공고수-->
+    <select id="getPostDeadlineToday" resultType="int">
+        SELECT COUNT(*) FROM posts WHERE DATE(deadline) = curdate() and deleted =0
+    </select>
+
+
+
+<!--    남은신고처리건-->
+    <select id="reportremaincount" resultType="int">
+    SELECT COUNT(*) FROM reports WHERE cleared = 0
+    </select>
+
+
+    <!-- 최근 신고처리건-->
+    <select id="recentReports" resultType="com.juniorok.juniorok.dto.Reports">
+        SELECT r.*, c.name as company_name
+        FROM reports AS r
+                 JOIN companies AS c ON r.company_id = c.id
+        WHERE r.cleared = 0
+        ORDER BY r.id DESC
+            LIMIT 3
+    </select>
+
+
+    <!--    오늘마감공고데이터-->
+    <select id="todayDeadlinePosts" resultMap="postResultMap">
+        SELECT p.position, c.name AS company_name
+        FROM posts AS p
+        JOIN companies AS c ON p.company_id = c.id
+        WHERE DATE(deadline) = curdate()
+        and deleted =0
+        ORDER BY p.id DESC
+            LIMIT 3
+    </select>
+
+<!--    최근 공고3개-->
+    <select id="recentPost" resultMap="postResultMap">
+        SELECT p.position, c.name AS company_name
+        FROM posts AS p
+                 JOIN companies AS c ON p.company_id = c.id
+        where deleted=0
+        ORDER BY p.id DESC
+        LIMIT 3
+    </select>
 
 </mapper>

@@ -1,6 +1,6 @@
 package com.juniorok.juniorok.controller;
 
-import com.juniorok.juniorok.config.ApiConfig;
+
 import com.juniorok.juniorok.domain.Post;
 import com.juniorok.juniorok.form.PostForm;
 import com.juniorok.juniorok.service.CompanyService;
@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -58,4 +57,24 @@ public class PostController {
         model.addAttribute("posts", posts);
         return "posts/post_list_card::post_list_card";
     }
+
+
+    //수정페이지
+    @GetMapping("/modify/{postId}")
+    public String showPostModifyForm(@PathVariable("postId") Long postId, Model model) {
+        Post post = postService.getPostById(postId);
+        model.addAttribute("posts",post);
+        model.addAttribute("benefits", companyService.getAllBenefitTags());
+        return "posts/post_modify";
+    }
+
+    @GetMapping("/report")
+    public String report() {
+        return "errorpage";
+    }
+
+
+
+
+
 }

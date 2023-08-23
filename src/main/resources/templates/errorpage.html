@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Juniorok Admin</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      color : #51585e;
+    }
+    .content {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+<div class="content">
+  <a th:href="@{/}">
+    <img class="img d-block mx-auto" style="width: 200px" th:src="@{/img/warning.png}"
+         alt="JuniorOk 로고"/>
+  </a>
+  <br>
+  <br>
+  서비스 임시점검중입니다.
+  <br>
+  보다 안정적인 서비스 환경을 만들기 위해
+  <br>
+  현재 페이지의 서비스를 점검 중 입니다.
+  <br>
+  이용에 불편을 드린 점 진심으로 사과드리며,
+  <br>
+  예정된 시간 안에 점검을 마칠 수 있도록 최선을 다하겠습니다.
+  <br>
+  JuniorOK
+  <br>
+  <br>
+  점검 서비스 : 신고관리 페이지
+  <br>
+  점검 일자 : 2024.08.24(목)
+  <br>
+  점검 시간 : 오후 02:00~06:00
+  <br>
+  (총 4시간, 한국시간기준)
+  <br>
+  점검 이유 : 서비스 안정성 확보를 위한 점검을 진행합니다.
+</div>
+</body>
+
+</html>

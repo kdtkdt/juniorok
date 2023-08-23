@@ -40,5 +40,7 @@ public interface UserRepository {
     @Select("SELECT COUNT(*) FROM users WHERE nickname LIKE CONCAT('%', #{query}, '%')")
     int getTotalUsersCountByQuery(@Param("query") String query);
 
+    //오늘가입자
+    int getUsersJoinedTodayCount();
 
 }

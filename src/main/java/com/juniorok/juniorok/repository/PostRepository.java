@@ -1,6 +1,7 @@
 package com.juniorok.juniorok.repository;
 
 import com.juniorok.juniorok.domain.Post;
+import com.juniorok.juniorok.dto.Reports;
 import com.juniorok.juniorok.dto.Skill;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -23,5 +24,24 @@ public interface PostRepository {
     void deletePost(long postId);
     List<Skill> findAllSkills();
     void savePositionSkills(long postId, long skillId);
+    //오늘시작공고
+    int getPostStartAt();
 
+    //오늘마감공고
+    int getPostDeadlineToday();
+
+    //오늘마감공고3건데이터
+    List<Post> todayDeadlinePosts();
+
+    //처리가남은 신고건수
+    int reportremaincount();
+
+    //최근 신고건3건
+    List<Reports> recentReports();
+
+    //최근공고3개
+    List<Post> recentPost();
+
+
+    
 }

@@ -60,6 +60,7 @@ public class SecurityConfig {
                             new AntPathRequestMatcher("/user/deleteauthority", "GET")).hasAnyRole("ADMIN", "WRITER");
                     auth.requestMatchers(
                             new AntPathRequestMatcher("/adminpost", "GET"),
+                            new AntPathRequestMatcher("/post/report", "GET"),
                             new AntPathRequestMatcher("/admin/deletePost/**", "GET")).hasRole("ADMIN");
         })
                 .oauth2Login(config -> {

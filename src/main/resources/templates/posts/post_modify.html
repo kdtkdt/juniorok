@@ -1,0 +1,130 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Junior Ok</title>
+    <script th:src="@{/js/jquery-3.7.0.min.js}"></script>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<script>
+
+    $(document).ready(function() {
+        $(".modify-button").click(function(event) {
+            event.preventDefault();
+            var postId = $(this).data("post-id");
+            console.log(postId);
+            alert(postId);
+            window.location.href = "/post/update/" + postId;
+        });
+
+
+    });
+</script>
+
+
+</head>
+
+
+<body>
+<th:block th:insert="~{header :: header}">Header</th:block>
+
+
+    <span th:text="${posts}"></span>
+<!--<span th:text="${selectedBenefitIds}"></span>-->
+
+
+<!--<form class="container" th:action="@{/post/update/{posdId}(postId=${posts.id})}" method="post" th:object="${postForm}">-->
+<form class="container" th:action="@{/post/update/{postId}(postId=${posts.id})}" method="get" th:object="${postForm}">
+
+
+    <div class="m-2">
+        <div class="form-floating mb-3">
+            <input type="url" class="form-control" id="postUrl" placeholder="채용공고주소" name="postUrl"  th:value="${posts.postUrl}">
+            <label for="postUrl">채용공고주소</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="companyName" placeholder="회사이름" name="companyName" th:value="${ posts.getCompany().getName()}">
+            <label for="companyName">회사이름</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="position" placeholder="포지션" name="position" th:value="${posts.position}">
+            <label for="position">포지션</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <select class="form-select" id="jobType" aria-label="계약형태" name="jobType">
+                <option selected>여기를 눌러 계약형태를 선택해주세요.</option>
+                <option value="1" th:selected="${posts.jobType.id == 1}">인턴</option>
+                <option value="2" th:selected="${posts.jobType.id == 2}">풀타임</option>
+            </select>
+            <label for="jobType">계약형태</label>
+        </div>
+
+
+        <div class="input-group mb-3">
+            <div class="form-floating">
+                <input type="number" aria-label="최소 연봉" class="form-control" id="minSalary" placeholder="최소 연봉" name="minSalary"  th:value="${posts.minSalary}">
+                <label for="minSalary">최소 연봉</label>
+            </div>
+            <div class="form-floating">
+                <input type="number" aria-label="최대 연봉" class="form-control" id="maxSalary" placeholder="최대 연봉" name="maxSalary" th:value="${posts.maxSalary}">
+                <label for="maxSalary">최대 연봉</label>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="form-floating">
+                <input type="date" aria-label="시작일" class="form-control" id="startedAt" placeholder="시작일" name="startedAt" th:value="${posts.startedAt}">
+                <label for="startedAt">시작일</label>
+            </div>
+            <div class="form-floating">
+                <input type="date" aria-label="마감일" class="form-control" id="deadline" placeholder="마감일" name="deadline" th:value="${posts.deadline}">
+                <label for="deadline">마감일</label>
+            </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="search" class="form-control" id="skills" placeholder="기술" name="skills" th:value="${posts.positionSkills}">
+            <label for="skills">기술</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="employees" placeholder="사원수" name="employees" th:value="${posts.company.employees}">
+            <label for="employees">사원수</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="developers" placeholder="개발자수" name="developers" th:value="${posts.company.developers}">
+            <label for="developers">개발자수</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="url" class="form-control" id="techBlogUrl" placeholder="기술블로그주소" name="techBlogUrl" th:value="${posts.company.techBlog}">
+            <label for="techBlogUrl">기술블로그</label>
+        </div>
+        <div class="form-floating mb-3">
+            <textarea type="url" class="form-control" id="requirements" placeholder="자격요건" style="height: 100px" name="requirements" th:text="${posts.requirements}"></textarea>
+            <label for="requirements">자격요건</label>
+        </div>
+        <div class="form-floating mb-3">
+            <textarea type="url" class="form-control" id="preferredRequirements" placeholder="우대요건" style="height: 100px" name="preferredRequirements" th:text="${posts.preferredRequirements}"></textarea>
+            <label for="preferredRequirements">우대요건</label>
+        </div>
+
+        <div class="mb-3">
+            <th:block th:each="benefit : ${benefits}" th:object="${postForm}">
+                <input type="checkbox" class="btn-check" th:id="|benefit${benefit.id}|" autocomplete="off"
+                       th:checked="${#lists.contains(posts.company.benefits, benefit)}">
+                <label class="btn btn-outline-secondary" th:for="|benefit${benefit.id}|" th:text="${benefit.name}"></label>
+            </th:block>
+        </div>
+
+
+
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary w-100 fs-2 modify-button" th:attr="data-post-id=${posts.id}">수정</button>
+        </div>
+    </div>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>
