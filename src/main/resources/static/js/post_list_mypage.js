@@ -65,6 +65,9 @@ $(document).ready(() => {
 
     function addListenerToCard() {
         $(".card").on("click", function() {
+            if (isLoading) return; // 중복 로드 방지
+            isLoading = true;
+
             let postId = $(this).find("input[type='hidden']").val();
             requestPostDetail(postId, "GET")
         });
@@ -80,10 +83,56 @@ $(document).ready(() => {
             },
             success: function (xhr, status, response) {
                 $('.modal-content').empty().append(response.responseText);
-                loc = $('#companyLocation').html();
+                setTimeout(() => {
+                    loadMap();
+                    // https://devtalk.kakao.com/t/kakao-map-loading-console-parser-blocking-message/77540/4
+                    // #map 엘리먼트의 레이아웃 사이즈가 원하는 크기대로 잡혀 있어야만 제대로 지도가 나옵니다.
+                    // 그래서 의도적인 지연시간을 넣었습니다.
+                    // 지도는 공고 제일 하단에 위치하므로, 1초 정도의 지연은 사용자 경험에 영향이 없습니다.
+                }, 1000)
+                isLoading = false;
             },
             error: function (xhr, status, error) {
                 alert('오류가 발생하였습니다. 나중에 다시 시도해주세요.');
+            }
+        });
+    }
+
+    function loadMap() {
+        let mapContainer = document.getElementById('map');
+        let mapOption = {
+            center: new kakao.maps.LatLng(37.54699, 127.09598),
+            level: 3
+        };
+
+        let map = new kakao.maps.Map(mapContainer, mapOption);
+
+        // 주소-좌표 변환 객체를 생성합니다
+        let geocoder = new kakao.maps.services.Geocoder();
+
+        // 주소로 좌표를 검색합니다
+        geocoder.addressSearch($('#companyLocation').html(), function(result, status) {
+
+            // 정상적으로 검색이 완료됐으면
+            if (status === kakao.maps.services.Status.OK) {
+
+                let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                // 결과값으로 받은 위치를 마커로 표시합니다
+                let marker = new kakao.maps.Marker({
+                    map: map,
+                    position: coords
+                });
+
+                // 인포윈도우로 장소에 대한 설명을 표시합니다
+                let infowindow = new kakao.maps.InfoWindow({
+                    content: `<div style="width:150px;text-align:center;padding:6px 0;">${$('#companyName').html()}</div>`
+                });
+                infowindow.open(map, marker);
+
+                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                map.setCenter(coords);
+
             }
         });
     }
