@@ -9,6 +9,29 @@
                 </ol>
 
 
+
+                <div class="recommended">
+                    ⚡ 현재 추천 공고입니다.
+<!--                     <span th:text="${getRecommendedPosts}"></span>-->
+
+                    <div class="container_recommended">
+                        <form id="recommendForm" method="post">
+                            <div class="box_recommended" style="display: flex;">
+                                <div th:each="postrecommend : ${getRecommendedPosts}" class="post_recommended" style="width: 150px; height: 50px; display: flex; align-items: center;">
+                                    <input type="checkbox" th:id="'checkbox-' + ${postrecommend.id}" class="user-checkbox" style="margin-right: 10px;">
+                                    <span th:text="${postrecommend.getCompany().getName()}"></span>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-secondary unrecommended">추천해제</button>
+                        </form>
+                    </div>
+                </div>
+
+
+
+
+
+
                 <!-- 데이터테이블-->
                 <div class="card mb-4">
                     <div class="card-header">
@@ -30,6 +53,7 @@
                                 <th>지원마감일</th>
                                 <th>수 정</th>
                                 <th>삭 제</th>
+                                <th>추천</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -44,7 +68,9 @@
 
                                 <td><button class="btn btn-outline-primary modify-button" th:attr="data-post-id=${post.id}">수정</button></td>
 
-                                <td><button class="btn btn-outline-secondary delete-button" th:attr="data-post-id=${post.id}">삭 제</button></td>
+                                <td><button class="btn btn-outline-secondary delete-button" th:attr="data-post-id=${post.id}">삭제</button></td>
+
+                                <td><button class="btn btn-outline-success recommended-button" th:attr="data-post-id=${post.id}">추천</button></td>
                             </tr>
                             </tbody>
                         </table>

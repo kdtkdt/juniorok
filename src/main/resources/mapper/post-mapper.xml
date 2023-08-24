@@ -235,4 +235,40 @@
         LIMIT 3
     </select>
 
+
+    <!--공고추천-->
+    <update id="recommendPost" parameterType="java.lang.Long">
+        UPDATE posts SET recommended = 1 WHERE id = #{postId}
+    </update>
+
+    <!--공고추천해제-->
+    <update id="unrecommended" parameterType="java.util.List">
+        UPDATE posts SET recommended = 0 WHERE id
+        IN
+        <foreach collection="userIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+
+
+    </update>
+
+
+    <!--추천된 공고만 가져오기-->
+    <select id="getRecommendedPosts" resultMap="postResultMap">
+        SELECT
+            p.position,
+            p.id,
+            c.name AS company_name
+        FROM
+            posts AS p
+                JOIN
+            companies AS c ON p.company_id = c.id
+        WHERE
+            p.deleted = 0
+          AND p.recommended = 1
+        ORDER BY
+            p.id DESC
+    </select>
+
 </mapper>

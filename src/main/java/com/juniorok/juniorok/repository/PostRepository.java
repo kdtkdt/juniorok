@@ -42,6 +42,16 @@ public interface PostRepository {
     //최근공고3개
     List<Post> recentPost();
 
+    //admin- recommendPost 추천등록
+    void recommendPost(long postId);
+
+//    //admin- 추천해제
+    void unrecommended(@Param("userIds") List<Long> userIds);
+
+
+
+    //추천공고가져오기
+    List<Post>getRecommendedPosts();
 
     
 }

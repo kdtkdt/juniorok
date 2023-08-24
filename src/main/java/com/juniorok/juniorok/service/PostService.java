@@ -81,4 +81,17 @@ public class PostService {
     //최근공고3개
     public List<Post> recentPost(){return postRepository.recentPost();}
 
+    //어드민 게시글 추천
+    public void recommendPost(long postId){ postRepository.recommendPost(postId); }
+
+//    //어드민 게시글 추천해제
+    public void unrecommended(List<Long> userIds) {
+        postRepository.unrecommended(userIds);
+}
+
+
+    //최근공고3개
+    public List<Post> getRecommendedPosts(){return postRepository.getRecommendedPosts();}
+
+
 }

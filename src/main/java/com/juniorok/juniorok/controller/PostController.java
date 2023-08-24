@@ -1,11 +1,14 @@
 package com.juniorok.juniorok.controller;
 
 
+import com.juniorok.juniorok.config.ApiConfig;
 import com.juniorok.juniorok.domain.Post;
 import com.juniorok.juniorok.form.PostForm;
 import com.juniorok.juniorok.service.CompanyService;
 import com.juniorok.juniorok.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -74,7 +77,28 @@ public class PostController {
         return "errorpage";
     }
 
+    //추천공고낱개등록
+    @GetMapping("/recommendPost/{postId}")
+    public ResponseEntity<String> recommendPost(@PathVariable("postId") Long postId) {
+        System.out.println(postId);
 
+        try {
+            postService.recommendPost(postId);
+            return ResponseEntity.ok("Post recommended successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while recommending the post");
+        }
+    }
+
+         //추천공고낱개등록
+
+        //권한삭제
+        @GetMapping("/unrecommended")
+        public ResponseEntity<String> unrecommended(@RequestParam("ids[]") List<Long> ids) {
+//           System.out.println(ids);
+            postService.unrecommended(ids);
+            return ResponseEntity.ok("authority successful");
+        }
 
 
 
