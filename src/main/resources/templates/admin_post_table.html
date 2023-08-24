@@ -15,7 +15,7 @@
 <!--                     <span th:text="${getRecommendedPosts}"></span>-->
 
                     <div class="container_recommended">
-                        <form id="recommendForm" method="post">
+                        <form id="recommendForm" method="get">
                             <div class="box_recommended" style="display: flex;">
                                 <div th:each="postrecommend : ${getRecommendedPosts}" class="post_recommended" style="width: 150px; height: 50px; display: flex; align-items: center;">
                                     <input type="checkbox" th:id="'checkbox-' + ${postrecommend.id}" class="user-checkbox" style="margin-right: 10px;">
