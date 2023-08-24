@@ -38,10 +38,13 @@ public class AdminController {
     @GetMapping("/adminpost")
     public String showAdminBoard(Model model){
 
-            //10개씩
+        //10개씩
 //            model.addAttribute("posts", postService.getPage(1, 10));
-            //전체
-            model.addAttribute("posts", postService.getAllPosts());
+        //전체
+        model.addAttribute("posts", postService.getAllPosts());
+        model.addAttribute("getRecommendedPosts", postService.getRecommendedPosts());
+
+
         return "admin_post";
     }
 
