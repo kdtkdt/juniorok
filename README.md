@@ -2,22 +2,6 @@
   <img src="https://github.com/kdtkdt/juniorok/assets/135004614/7c573a63-c281-4ca3-ae46-3926112b9239">
 </p>
 
-![Static Badge](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
-![Static Badge](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
-![Static Badge](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white)
-![Static Badge](https://img.shields.io/badge/jQuery-0769AD?logo=jquery&logoColor=white)
-![Static Badge](https://img.shields.io/badge/Bootstrap-7952B3?logo=bootstrap&logoColor=white)  
-  
-![Static Badge](https://img.shields.io/badge/SpringBoot-6DB33F?logo=springboot&logoColor=white)
-![Static Badge](https://img.shields.io/badge/SpringSecurity-6DB33F?logo=springsecurity&logoColor=white)
-![Static Badge](https://img.shields.io/badge/Thymeleaf-005F0F?logo=thymeleaf&logoColor=white)  
-  
-![Static Badge](https://img.shields.io/badge/MySql-4479A1?logo=mysql&logoColor=white)
-<img src="https://img.shields.io/badge/Mybatis-000000?style=flat&logo=Fluentd&logoColor=white" />  
-  
-![Static Badge](https://img.shields.io/badge/Postman-FF6C37?logo=postman&logoColor=white)
-![Static Badge](https://img.shields.io/badge/IntelliJidea-000000?logo=intellijidea&logoColor=white)
-
 # 🤔 서비스 기획 의도
 ## 5조, Junior 5k 의 `Junior Ok`는 주니어 개발자 채용공고 큐레이션 사이트 입니다.
 ### 나에게 맞는 공고를 찾는 어려움
@@ -40,6 +24,29 @@
 - 2023.08.10 ~ 2023.08.24
 
 # 🏢💼📱기능
+
+## 사용 기술
+
+![Static Badge](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![Static Badge](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![Static Badge](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=white)
+![Static Badge](https://img.shields.io/badge/jQuery-0769AD?logo=jquery&logoColor=white)
+![Static Badge](https://img.shields.io/badge/Bootstrap-7952B3?logo=bootstrap&logoColor=white)  
+  
+![Static Badge](https://img.shields.io/badge/SpringBoot-6DB33F?logo=springboot&logoColor=white)
+![Static Badge](https://img.shields.io/badge/SpringSecurity-6DB33F?logo=springsecurity&logoColor=white)
+![Static Badge](https://img.shields.io/badge/Thymeleaf-005F0F?logo=thymeleaf&logoColor=white)  
+  
+![Static Badge](https://img.shields.io/badge/MySql-4479A1?logo=mysql&logoColor=white)
+<img src="https://img.shields.io/badge/Mybatis-000000?style=flat&logo=Fluentd&logoColor=white" />  
+  
+![Static Badge](https://img.shields.io/badge/Postman-FF6C37?logo=postman&logoColor=white)
+![Static Badge](https://img.shields.io/badge/IntelliJidea-000000?logo=intellijidea&logoColor=white)
+
+## 외부 API
+
+- Github 로그인(OAuth app)
+- 국민연금공단_국민연금 가입 사업장 내역([링크](https://www.data.go.kr/data/3046071/openapi.do#/tab_layer_detail_function))
 
 ## 회원
 - Github 로그인 : Github 로고만 있으면 로그인 버튼인지 알아차리기 힘들어, 다른 소셜 로그인 아이콘과 함께 배치하고 지원 예정임을 표시하였습니다.
@@ -73,11 +80,15 @@
 
 ## 관리자페이지
 
+![image](https://github.com/kdtkdt/juniorok/assets/135004614/4286f803-f8d2-485a-ae05-51fdec511942)
+
 ### 공고관리
 - 공고조회 : 전체 공고 내용을 보고 관리할 수 있습니다.
 - 공고수정 : 관리자 계정으로 공고를 수정합니다. 
 - 공고등록 : 공고 작성 페이지로 연동하여 관리자페이지에서 공고 작성이 가능합니다.
-- 공고삭제 : 부적절한 게시물 및 기한이 끝난 공고를 삭제합니다. 
+- 공고삭제 : 부적절한 게시물 및 기한이 끝난 공고를 삭제합니다.
+
+![image](https://github.com/kdtkdt/juniorok/assets/135004614/eac5ea5d-cf5c-488b-812c-1a5755043ffe)
 
 ### 회원관리
 - 사용자목록 : 가입된 사용자 전체를 보고 관리할 수 있습니다.
