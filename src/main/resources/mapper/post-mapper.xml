@@ -256,9 +256,8 @@
 
     <!--추천된 공고만 가져오기-->
     <select id="getRecommendedPosts" resultMap="postResultMap">
-        SELECT
-            p.position,
-            p.id,
+       SELECT
+            p.*,
             c.name AS company_name
         FROM
             posts AS p
