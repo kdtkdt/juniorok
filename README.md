@@ -85,6 +85,7 @@
   
 ![Static Badge](https://img.shields.io/badge/SpringBoot-6DB33F?logo=springboot&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/SpringSecurity-6DB33F?logo=springsecurity&logoColor=white)
+![Static Badge](https://img.shields.io/badge/Gradle-02303A?logo=gradle&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/Thymeleaf-005F0F?logo=thymeleaf&logoColor=white)  
   
 ![Static Badge](https://img.shields.io/badge/MySql-4479A1?logo=mysql&logoColor=white)
@@ -95,6 +96,7 @@
 
 ## 외부 API
 
+- 카카오맵 API
 - Github 로그인(OAuth app)
 - 국민연금공단_국민연금 가입 사업장 내역([링크](https://www.data.go.kr/data/3046071/openapi.do#/tab_layer_detail_function))
   - 평균연봉
