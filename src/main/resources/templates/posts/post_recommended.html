@@ -1,0 +1,54 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Junior Ok</title>
+    <script th:src="@{/js/jquery-3.7.0.min.js}"></script>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<section class="pt-5 pb-5">
+    <div class="container">
+        <div class="row">
+<th:block th:fragment="post_recommended">
+    <div class="col-12">
+        <div id="postRecommendedCarousel" class="carousel" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item pop-on-hover" th:each="post, s : ${posts}" data-bs-toggle="modal" data-bs-target="#postDetailsModal">
+                    <div class="card" style="height: 250px">
+                        <input type="hidden" th:id="|postId${s.count}|" th:value="${post.getId()}">
+                        <h5 class="card-header text-nowrap" th:text="${post.getCompany().getName()}">회사명</h5>
+                        <div class="card-body">
+                            <h5 class="card-title mb-3" th:text="${post.getPosition()}">포지션명</h5>
+                            <span class="btn rounded-5 py-0 disabled"
+                                  th:text="${post.getLocation().split(' ')[0].replace('특별', '').replace('시', '')}">경기</span>
+                            <span th:if="${post.getCompany().getAvgSalary() != null}"
+                                  class="btn rounded-5 py-0 disabled" th:text="|평균연봉: ${post.getCompany().getAvgSalary()}|"></span>
+                            <th:block th:each="positionSkill, s : ${post.getPositionSkills()}">
+                                <th:block th:if="${s.count <= 3}">
+                                    <span class="btn rounded-5 py-0 disabled" th:text="${positionSkill.getName()}"></span>
+                                </th:block>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#postRecommendedCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#postRecommendedCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+</th:block>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Junior Ok</title>
+    <script th:src="@{/js/jquery-3.7.0.min.js}"></script>
+    <script th:src="@{/js/post_list_mypage.js}"></script>
+    <script th:src="@{/js/temp_carousel.js}"></script>
+    <script th:src="@{/js/bootstrap_tooltip.js}"></script>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/post_list_card_style.css}" rel="stylesheet">
+    <link th:href="@{/css/temp_carousel.css}" rel="stylesheet">
+
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script type="text/javascript"
+            th:src="@{'//dapi.kakao.com/v2/maps/sdk.js?appkey=' + __${kakaoMapAppkey}__ + '&libraries=services'}"></script>
+
+
+</head>
+<body>
+<th:block th:insert="~{header :: header}">Header</th:block>
+<main class="container">
+    <input id="csrf" type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+    <div class="row">
+        <th:block th:insert="~{posts/post_recommended::post_recommended}"></th:block>
+    </div>
+    <div class="input-group mb-3">
+        <input id="keyword" type="text" class="form-control" placeholder="키워드 검색" aria-label="키워드 검색" aria-describedby="search-button">
+        <button class="btn btn-outline-secondary" type="button" id="search-button">🔍</button>
+    </div>
+    <div id="skillsContainer" class="mb-3">
+        <th:block th:each="skill : ${skills}">
+            <input th:type="checkbox" class="btn-check" th:id="|skill${skill.getId()}|" autocomplete="off" th:field="*{skills}" th:value="${skill.getName()}">
+            <label class="btn btn-outline-secondary" th:for="|skill${skill.getId()}|" th:text="${skill.getName()}"></label>
+        </th:block>
+    </div>
+    <div id="postListContainer" class="container-fluid">
+        <th:block th:insert="~{posts/post_list_card::post_list_card}" />
+    </div>
+    <div class="modal fade" id="postDetailsModal" tabindex="-1" aria-labelledby="postDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl modal-fullscreen-sm-down">
+            <div class="modal-content">
+                <th:block th:insert="~{posts/post_modal::post_details_modal}" />
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>

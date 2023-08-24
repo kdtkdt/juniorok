@@ -20,6 +20,12 @@ public class BoardController {
         return "mainboard";
     }
 
+    @GetMapping({"/temp"})
+    public String showTemporalMainBoard(Model model) {
+        loadPosts(model);
+        return "temporal_main";
+    }
+
     @GetMapping("/mypage")
     public String showMyPage(Model model) {
         loadPosts(model);
