@@ -63,7 +63,7 @@ public class SecurityConfig {
                             new AntPathRequestMatcher("/adminpost", "GET"),
                             new AntPathRequestMatcher("/post/report", "GET"),
                             new AntPathRequestMatcher("/post/recommendPost/**", "GET"),
-                            new AntPathRequestMatcher("/post/unrecommended/**", "GET"),
+                            new AntPathRequestMatcher("/post/unrecommended", "GET"),
                             new AntPathRequestMatcher("/admin/deletePost/**", "GET")).hasRole("ADMIN");
         })
                 .oauth2Login(config -> {
